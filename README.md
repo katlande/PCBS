@@ -13,9 +13,9 @@ PCBS is a tool for analyzing WGBS datasets in a fast, flexible, and accurate fas
 Usage: Rscript --vanilla  Bismark2Matrix.R file_path file_tsv file_out
 * file_path = /path/to/cov/files
 * file_tsv = A three column, tab-separated file in this format:
-  file    name    group
-  s1.cov  s1_trt  trt
-  s2.cov  s2_ctl  ctl
+  *  files | sample | group
+  * s1.cov | s1_trt | trt
+  * s2.cov | s2_ctl | ctl
 
 * file_out = output file name
 
