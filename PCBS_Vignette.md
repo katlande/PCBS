@@ -23,22 +23,28 @@ number of DMRs called, as well as the size of DMRs called.
 Currently, Eigenvector WGBS analysis is only set up to handle
 comparisons of two-condition, one-factor experiments.
 
+``` r
+# install PCBS using devtools
+if(!require(PCBS)){ devtools::install_github("katlande/PCBS") }
+library(PCBS)
+```
+
 ## Reading in our input file
 
 We provide a script, Bismark2Matrix.R, that can be used to covert
 Bismark outputed .cov files into the below format.
 
 ``` r
-eigen <- read.delim("WGBS.txt")
+eigen <- read.delim("WGBS.txt") # https://github.com/katlande/PCBS/WGBS.txt
 eigen[1:5,1:5]
 ```
 
-    ##           cpgID trt1_PercMeth trt1_nCpG trt2_PercMeth trt2_nCpG
-    ## 1 chr1:10000000     0.3846154        65     0.5769231        78
-    ## 2 chr1:10000007     0.5915493        71     0.4457831        83
-    ## 3 chr1:10000019     0.5773196        97     0.4782609        46
-    ## 4  chr1:1000002     0.6363636        66     0.6931818        88
-    ## 5 chr1:10000028     0.4218750        64     0.3898305        59
+    ##          cpgID trt1_PercMeth trt1_nCpG trt2_PercMeth trt2_nCpG
+    ## 1 chr2:2505718     0.5581395        43     0.4084507        71
+    ## 2 chr2:1807326     0.5652174        69     0.4883721        43
+    ## 3 chr2:2490208     0.4489796        49     0.5416667        72
+    ## 4 chr2:5512828     0.5263158        38     0.6315789        19
+    ## 5 chr3:1296629     0.6000000        35     0.4242424        66
 
 ##### 
 
@@ -53,9 +59,9 @@ DefineBestPC(eigen, IDs = c("trt", "ctl")) # IDs segregate two conditions based 
 ```
 
     ## 
-    ## Best PC to use is PC1 with a sample distance of  221, representing 29.21% of the total variance.
+    ## Best PC to use is PC1 with a sample distance of 45.4, representing 29.81% of the total variance.
 
-![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ## Score each CpG by its eigenvector value
 
@@ -71,13 +77,13 @@ getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1) -> ranks # Get an eigenvector s
 head(ranks)
 ```
 
-    ##                    PC_Score
-    ## chr1:10000000  0.0011814371
-    ## chr1:10000007  0.0002623601
-    ## chr1:10000019  0.0008969914
-    ## chr1:1000002   0.0003490072
-    ## chr1:10000028 -0.0007432355
-    ## chr1:10000035  0.0007022953
+    ##                   PC_Score
+    ## chr2:2505718  3.781088e-05
+    ## chr2:1807326  4.573342e-04
+    ## chr2:2490208  3.156102e-03
+    ## chr2:5512828 -5.695585e-03
+    ## chr3:1296629  2.822282e-03
+    ## chr3:3212276 -6.044066e-03
 
 ## Identifying a DML cut-off
 
@@ -92,9 +98,9 @@ the primary function of eigenvector analysis.
 rankDist(ranks, mode="intersect") # Two modes "intersect" and "strict"
 ```
 
-    ## Estimated rank cut-off for significant CpGs is 21983.
+    ## Estimated rank cut-off for significant CpGs is 980.
 
-![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 Generally speaking, the best cut-off rank occurs just above the
 inflection point of the plot of Absolute Rank vs. Absolute Score. The
@@ -123,19 +129,33 @@ rank manually.
 
 ``` r
 DMLs <- addRanks(ranks) # add rank order to our CpGs
-DMLs$significant <- DMLs$abs.order <= 21983 # significant CpG cut-off defined by rankDist() is: 21983
+DMLs$significant <- DMLs$abs.order <= 980 # significant CpG cut-off defined by rankDist() is: 980
 head(DMLs)
 ```
 
-    ##                  PC_Score   order abs.order  chr     pos significant
-    ## chr1:9676127  0.007111105       1         1 chr1 9676127        TRUE
-    ## chr1:8652821  0.007058246       2         2 chr1 8652821        TRUE
-    ## chr3:30403    0.007021848       3         3 chr3   30403        TRUE
-    ## chr2:3271955  0.007012772       4         4 chr2 3271955        TRUE
-    ## chr2:350869  -0.006987694 1215093         5 chr2  350869        TRUE
-    ## chr1:9060703 -0.006984474 1215092         6 chr1 9060703        TRUE
+    ##                 PC_Score order abs.order  chr     pos significant
+    ## chr3:3291453  0.03364091     1         1 chr3 3291453        TRUE
+    ## chr3:31670    0.03343012     2         2 chr3   31670        TRUE
+    ## chr3:3082482  0.03337153     3         3 chr3 3082482        TRUE
+    ## chr2:350483  -0.03296202 50000         4 chr2  350483        TRUE
+    ## chr1:8652017  0.03291018     4         5 chr1 8652017        TRUE
+    ## chr3:4531184 -0.03270712 49999         6 chr3 4531184        TRUE
 
 We now have a file with a significance for all CpGs.
+
+## Identifying a DML cut-off manually
+
+In some cases, the cut-off predicted by getPCRanks may look imperfect.
+In such cases, cut-off values can be tested manually:
+
+``` r
+test_50 <- checkRank(ranks, 50) # set cut-off to 50
+test_500 <- checkRank(ranks, 500) # set cut-off to 500
+test_5000 <- checkRank(ranks, 5000) # set cut-off to 5000
+gridExtra::grid.arrange(test_50+tilt(), test_500+tilt(), test_5000+tilt(), nrow=1)
+```
+
+![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ## Calling DMRs
 
@@ -155,54 +175,33 @@ expansion containing over 90% of the most variable CpGs
 ##### DMR calling occurs in two steps:
 
 ``` r
-find_best_nSeed(ranks, 21983) # (1) identifying the optimal number of seeds to use 
+find_best_nSeed(ranks, 980) # (1) identifying the optimal number of seeds to use 
 ```
 
     ## 
     ## Checking 13 seed values for best DMR calling............. done!
 
-    ## 
-    ## Overcompression begins around nSeed=49461. This is an optimal seed number for DMR calling.
-
-![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ``` r
-# 49461 seeds is the optimal value
-DMRs <- Get_Novel_DMRs(ranks, 49461, DMR_resolution=200, minCpGs=10) # (2) call DMRs based on the optimal seed number
+# Since no over-compression is detected, we can simply use the largest seed value tested - 2940 (980 x 3)
+DMRs <- Get_Novel_DMRs(ranks, 2940, DMR_resolution=200, minCpGs=10) # (2) call DMRs based on the optimal seed number
 ```
 
-    ## Splitting data by chromosome...
-
-    ## Bootstrapping background distributions for each chromosome...
-
-    ## Compressing nearby seeds...
-
-    ## done! Collapsed 49461 seeds to 6183 seeds!
-
     ## 
-    ## Expanding DMRs from 6183 seeds...
-
-    ## 
-    ## Trimming 6183 DMRs... done!
+    ## Trimming 136 DMRs... done!
 
 ``` r
 head(DMRs[order(DMRs$FDR, decreasing = F),])
 ```
 
-    ##         Chr   Start     End DMR_Zscore nCpGs             p DMR_size
-    ## 112176 chr3 2930037 2933861  208.92825   571 9.475993e-138     3824
-    ## 10355  chr3 3710015 3713724  146.91840   525 1.778992e-136     3709
-    ## 112760 chr2 2560012 2563779  189.98662   542 4.658351e-136     3767
-    ## 10391  chr2  280030  283577 -281.12965   520 3.408374e-132     3547
-    ## 112380 chr3 4720022 4723800  -71.81773   566 1.924809e-130     3778
-    ## 10549  chr2 6050082 6053433  285.29007   488 1.922404e-127     3351
-    ##                  FDR
-    ## 112176 5.859007e-134
-    ## 10355  1.099773e-132
-    ## 112760 2.879327e-132
-    ## 10391  2.106375e-128
-    ## 112380 1.189339e-126
-    ## 10549  1.187661e-123
+    ##       Chr   Start     End DMR_Zscore nCpGs            p DMR_size          FDR
+    ## 114  chr3 4920450 4923267  -39.46126    24 8.112731e-08     2817 3.001711e-06
+    ## 97   chr3 4140014 4142951  -24.99601    25 1.104878e-07     2937 3.977561e-06
+    ## 93   chr3 1340221 1342791  -26.24641    23 1.260696e-07     2570 4.412436e-06
+    ## 1022 chr1 8650728 8652017   63.14904    13 2.867361e-06     1289 9.749026e-05
+    ## 125  chr3 3960576 3962805   14.48081    14 6.348389e-06     2229 2.094969e-04
+    ## 78   chr3 5080015 5081519  -32.96654    10 1.826299e-05     1504 5.844157e-04
 
 ## Score pre-defined regions
 
@@ -213,18 +212,21 @@ directly, rather than by querying novel DMR calls for overlaps.
 
 ``` r
 # Make a dataframe of regions to check:
-regions <- data.frame(chr=c("chr3", "chr2", "chr1"),
-                      s=c(2930037, 280330, 300000),
-                      e=c(2933861, 283677, 300500),
-                      ID=c("Hyper-DMR", "partial Hypo-DMR", "random"))
+regions <- data.frame(chr=c("chr3", "chr3", "chr1"),
+                      s=c(4920450, 3961576, 300000),
+                      e=c(4923267, 3963805, 302900),
+                      ID=c("Hypo-DMR", "partial Hyper-DMR", "random"))
 
 getRegionScores(DMLs, regions)
 ```
 
-    ##            feature        meanPC nCpG          Z             p
-    ## 1        Hyper-DMR  0.0040436213  571  4.4796557 2.507733e-141
-    ## 2 partial Hypo-DMR -0.0040839277  476 -4.5397388 1.094712e-120
-    ## 3           random -0.0003210901   24 -0.3640006  6.040479e-01
+    ##             feature       meanPC nCpG         Z            p
+    ## 1          Hypo-DMR -0.020963435   24 -4.734254 2.402772e-08
+    ## 2 partial Hyper-DMR  0.008092709    8  1.823630 7.348563e-06
+    ## 3            random -0.003612135    8 -0.818118 2.297398e-02
 
 getRegionScores returns the mean eigenvector scores for each input
-region, as well as Z-score against the background, and a p-value.
+region, as well as Z-score against the background, and a p-value. As you
+can see in our test set, true DMRs and regions partially overlapping
+true DMRs are significant, whereas random regions do not show
+enrichment.
