@@ -20,4 +20,4 @@ Usage: Rscript --vanilla  Bismark2Matrix.R file_path file_tsv file_out
 * file_out = output file name
 
 ## Usage
-See our vignette
+See our [vignette](https://github.com/katlande/PCBS/blob/main/PCBS_Vignette.md)
