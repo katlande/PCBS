@@ -1,0 +1,10 @@
+Package: PCBS
+Type: Package
+Title: Principle Component BiSulfite
+Version: 0.1.0
+Author: Kathryn Lande
+Maintainer: Kathryn Lande <kathryn.lande@mail.mcgill.ca>
+Description: Fast, accurate, and flexible analysis of large WGBS datasets.
+License: 
+Encoding: UTF-8
+LazyData: true
