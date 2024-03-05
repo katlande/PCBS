@@ -8,3 +8,4 @@ Description: Fast, accurate, and flexible analysis of large WGBS datasets.
 License: 
 Encoding: UTF-8
 LazyData: true
+Imports: ggplot2, tibble, ggrepel

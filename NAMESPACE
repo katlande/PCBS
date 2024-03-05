@@ -1,1 +1,4 @@
 exportPattern("^[[:alpha:]]+")
+import(ggplot2)
+import(tibble)
+import(ggrepel)
