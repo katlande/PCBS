@@ -189,19 +189,19 @@ DMRs <- Get_Novel_DMRs(ranks, 2940, DMR_resolution=200, minCpGs=10) # (2) call D
 ```
 
     ## 
-    ## Trimming 136 DMRs... done!
+    ## Trimming 135 DMRs... done!
 
 ``` r
 head(DMRs[order(DMRs$FDR, decreasing = F),])
 ```
 
-    ##       Chr   Start     End DMR_Zscore nCpGs            p DMR_size          FDR
-    ## 114  chr3 4920450 4923267  -39.46126    24 8.112731e-08     2817 3.001711e-06
-    ## 97   chr3 4140014 4142951  -24.99601    25 1.104878e-07     2937 3.977561e-06
-    ## 93   chr3 1340221 1342791  -26.24641    23 1.260696e-07     2570 4.412436e-06
-    ## 1022 chr1 8650728 8652017   63.14904    13 2.867361e-06     1289 9.749026e-05
-    ## 125  chr3 3960576 3962805   14.48081    14 6.348389e-06     2229 2.094969e-04
-    ## 78   chr3 5080015 5081519  -32.96654    10 1.826299e-05     1504 5.844157e-04
+    ##      Chr   Start     End DMR_Zscore nCpGs            p DMR_size          FDR
+    ## 114 chr3 4920450 4923267  -38.49148    24 8.033948e-08     2817 2.892221e-06
+    ## 97  chr3 4140014 4142951  -24.38989    25 1.087796e-07     2937 3.807287e-06
+    ## 93  chr3 1340221 1342791  -25.60886    23 1.242983e-07     2570 4.226143e-06
+    ## 57  chr1 8650728 8652017   62.98847    13 2.846637e-06     1289 9.393903e-05
+    ## 125 chr3 3960576 3962805   14.09448    14 6.455052e-06     2229 2.065617e-04
+    ## 78  chr3 5080015 5081519  -32.16005    10 1.816110e-05     1504 5.629942e-04
 
 ## Score pre-defined regions
 
@@ -220,13 +220,56 @@ regions <- data.frame(chr=c("chr3", "chr3", "chr1"),
 getRegionScores(DMLs, regions)
 ```
 
-    ##             feature       meanPC nCpG         Z            p
-    ## 1          Hypo-DMR -0.020963435   24 -4.734254 2.402772e-08
-    ## 2 partial Hyper-DMR  0.008092709    8  1.823630 7.348563e-06
-    ## 3            random -0.003612135    8 -0.818118 2.297398e-02
+    ##             feature       meanPC nCpG          Z            p
+    ## 1          Hypo-DMR -0.020963435   24 -4.6693669 3.782263e-08
+    ## 2 partial Hyper-DMR  0.008092709    8  1.7937726 8.985269e-06
+    ## 3            random -0.003612135    8 -0.8098088 1.589533e-02
 
 getRegionScores returns the mean eigenvector scores for each input
 region, as well as Z-score against the background, and a p-value. As you
 can see in our test set, true DMRs and regions partially overlapping
 true DMRs are significant, whereas random regions do not show
 enrichment.
+
+## Metagenes
+
+We also provide functionality for generating metagenes over a set of
+regions based on PC Scores. In these figures, values above 0 represent
+regions where the treatment group is hypermethylated, while values below
+0 represent hypomethylated regions.
+
+##### Make a metagene from the significant hypermethylated DMRs:
+
+``` r
+hyper_DMRs <- DMRs[DMRs$FDR <= 0.05 & DMRs$DMR_Zscore > 0,] # Select all significantly hypermethylated DMRs
+regions_hyper <- hyper_DMRs[c(1:3)] # select chrom, start, and end of all hyper DMRs
+score_metagene(ranks, regions_hyper)
+```
+
+![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+Our hypermethylated DMR regions broadly show a highly positive PC-score
+across the regions. This is what we expect for hypermethylated regions.
+
+##### Plot metagenes of multiple regions together
+
+``` r
+# Let's plot the metagene of the hyper-DMRs and hypo-DMRs together on the same plot..
+
+hypo_DMRs <- DMRs[DMRs$FDR <= 0.05 & DMRs$DMR_Zscore < 0,] # Select all significantly hypermethylated DMRs
+regions_hypo <- hypo_DMRs[c(1:3)] # select chrom, start, and end of all hyper DMRs
+
+# Setting return.data = T will cause score_metagene to return raw data instead of a plot
+hyper_metagene <- score_metagene(ranks, regions_hyper, return.data = T)
+hypo_metagene <- score_metagene(ranks, regions_hypo, return.data = T)
+
+# The multiple_metagenes function plots multiple metagenes using a list of raw data objects from score_metagene().
+multiple_metagenes(data_list = list(hyper_metagene, hypo_metagene), # list of raw data
+                   set_names = c("Hyper DMRs", "Hypo DMRs"), # names for elements of the data_list list
+                   title="Metagenes of DMR Regions", legend.title = F)
+```
+
+![](PCBS_Vignette_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+As expected, our hypo-DMRs show very negative PC-score across the
+regions.
