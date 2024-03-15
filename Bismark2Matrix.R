@@ -4,48 +4,31 @@ args = commandArgs(trailingOnly=TRUE)
 # Rscript --vanilla script.R file_path file_tsv file_out
 # Reproducible PCA-based approach for methylation
 
-# Step 1: combine bismark.cov files into a matrix
-covList <- read.delim(args[2], header=F)
+# Combine bismark.cov files into a matrix
+covList <- read.delim(args[2], header=F, nrows = 1000)
 for(i in 1:nrow(covList)){
   name <- as.character(covList[i,2])
-  cat(paste0("processing ", name, "...\n"))
+  condition <- as.character(covList[i,2])
+  message(paste0("processing ", name, "..."))
   df <- read.delim(paste0(args[1],"/",as.character(covList[i,1])), header=F)
-  #df <- read.delim(paste0("/gpfs/analyses/kat/PO1/WGBS_Oct2022/PC_method/test_data/large_test_data/",as.character(covList[i,1])), header=F)
   df$cpgID <- paste0(df$V1,":",df$V2)
   df$count <- df$V5+df$V6
   df <- df[c(7,4,8)]
-  colnames(df) <- c("cpgID", paste0(name,"_PercMeth"), paste0(name, "_nCpG"))
+  colnames(df) <- c("cpgID", paste0(name, "_", condition, "_PercMeth"), paste0(name, "_", condition, "_nCpG"))
 
   if(i == 1){
     output <- df
   } else {
-    cat(paste("merging", name, "to output...\n"))
-    output <- merge(output, df, by="cpgID", all=T)
+    message(paste("merging", name, "to output..."))
+    output <- merge(output, df, by="cpgID", all=F) # remove NA rows
   }
 }
 
-# Step 2: Remove NAs:
-rm_rows <- c()
-cat("Removing rows with missing data...\n")
-#for(id in c("trt", "ctl")){
-for(id in unique(covList[[3]])){
-  output[which(grepl(id, colnames(output)) & grepl("PercMeth", colnames(output)))] -> tmp
-  tmp$keep <- T
-  tmp$keep[c(as.numeric(which(apply(tmp, 1, function(z) sum(is.na(z))) > floor((ncol(tmp)-1)/2))))] <- F
-  rm_rows <- c(rm_rows, which(tmp$keep==F))
-}
-output[-c(unique(rm_rows)),]->output
+message("Removing NA rows...")
+output <- na.omit(output)
 
-# Save
+message("Writing output...")
 write.table(output, args[3], sep="\t", quote=F, col.names = T, row.names = F)
-
-
-
-
-
-
-
-
 
 
 
