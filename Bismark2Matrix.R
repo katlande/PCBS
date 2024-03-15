@@ -8,7 +8,7 @@ args = commandArgs(trailingOnly=TRUE)
 covList <- read.delim(args[2], header=F, nrows = 1000)
 for(i in 1:nrow(covList)){
   name <- as.character(covList[i,2])
-  condition <- as.character(covList[i,2])
+  condition <- as.character(covList[i,3])
   message(paste0("processing ", name, "..."))
   df <- read.delim(paste0(args[1],"/",as.character(covList[i,1])), header=F)
   df$cpgID <- paste0(df$V1,":",df$V2)
