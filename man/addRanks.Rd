@@ -7,9 +7,5 @@ getPCRanks(ranks)
 \description{
 Defines the best principle component to use for downstream analysis.}
 \arguments{
-\item{ranks}{data.frame}
-}
-\value{getPCRanks output data frame.}
-\examples{
-getPCRanks(ranks)
+\item{ranks}{getPCRanks output data frame.}
 }

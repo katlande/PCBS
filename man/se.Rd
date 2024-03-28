@@ -5,6 +5,4 @@
 se(x)
 }
 \description{Takes the standard error of a vector.}
-\examples{
-se(sample(1:10,5))
-}
+

@@ -4,7 +4,7 @@ oneSeed <- function(chroms, seed, resolution, max.size, mincpgs, null_list, Zlim
   null <- null_list[[seed.chrom]]
   df <- chroms[[seed.chrom]]
 
-  df.main <- na.omit(df[ .( c(seed.pos-(max.size/2)):(seed.pos+(max.size/2)) ) ])
+  df.main <- na.omit(df[ .( c((seed.pos-(max.size/2)):(seed.pos+(max.size/2))) ) ])
   if(nrow(df.main) > mincpgs){
     u.pop <- null[1]
     sd.pop <- null[2]
