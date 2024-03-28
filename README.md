@@ -6,6 +6,7 @@ PCBS is an R package with the following dependencies:
 * ggrepel
 * ggplot2
 * dplyr
+* data.table
 
 ## Data Setup
 PCBS is a tool for analyzing WGBS datasets in a fast, flexible, and accurate fashion. PCBS is designed to pipe in Bismark-aligned WGBS data. The PCBS input file can be generated from bismark .cov files with the provided Bismark2Matrix.R script.
