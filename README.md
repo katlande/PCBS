@@ -21,6 +21,8 @@ Usage: Rscript --vanilla  Bismark2Matrix.R file_path file_tsv file_out
 
 * file_out = output file name
 
+#### Important note: PCBS cannot handle CpGs that are NA an any sample, and these are removed by Bismark2Matrix.R. For this reason, PCBS is not recommended for sparse datasets. 
+
 
 ## Installation
 devtools::install_github("katlande/PCBS")
