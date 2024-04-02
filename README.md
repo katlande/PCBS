@@ -1,4 +1,5 @@
 # PCBS - Principle Component BiSulfite
+See our [package site]([https://katlande.github.io/PCBS/index.html]) 
 
 ## Dependencies
 PCBS is an R package with the following dependencies:
@@ -26,4 +27,6 @@ devtools::install_github("katlande/PCBS")
 
 
 ## Usage
-See our [vignette](https://github.com/katlande/PCBS/blob/main/PCBS_Vignette.md)
+See our [vignette]([https://katlande.github.io/PCBS/articles/Differential_Methylation.html])
+
+
