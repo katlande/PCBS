@@ -86,11 +86,13 @@ gridExtra::grid.arrange(test_50+tilt(), test_500+tilt(), test_5000+tilt(), nrow=
 ## Calling DMRs
 Differentially methylated region (DMR) calling is where eigenvector analysis shines. In simulated genomes, the eigenvector-based DMR calling system has the lowest false call rate compared to other tested softwares (false positive + false negative). Basepair for basepair, most other DMR callers dramatically over predict the size of DMR regions compared to the present method. 
 
-Our DMR calling algorithm works by defining a rank cut-off, wherein CpGs below this rank are extracted as seeds. Nearby CpGs are collapsed into single seed points at their median. The function expands outwards from each seed point up to a maximum DMR size, then identifies the smallest expansion containing over 90% of the most variable CpGs
+Our DMR calling algorithm works by defining a rank cut-off, wherein CpGs below this rank are extracted as seeds. Nearby CpGs are collapsed into single seed points at their median. The function expands outwards from each seed point up to a maximum DMR size, then identifies the smallest expansion containing over 90% of the most variable CpGs. In general, the only downside to using a larger number of seeds is that the DMR calling will take more time. However, with smaller or more sparse genomes, you can run into a problem called "overcompression." This occurs when seeds from multiple DMRs are collapsed into single points, and can be avoided by running your candidate seed number through the find_best_nSeed() function. If the function finds no overcompression, you are clear to use any of the seed numbers it checked (x-axis values below). In general, as long as you are not overcompressing, increasing the number of seeds will increase your true postive calls without increasing your false positive calls. A smaller seed number will only find highly significant DMRs, while a larger seed number will be able to identify a greater number of more weakly significant DMRs.
+
 
 ##### DMR calling occurs in two steps: 
 ```{r, message = FALSE}
 find_best_nSeed(ranks, 980) # (1) identifying the optimal number of seeds to use 
+# For smaller genomes such as this practice set, we can use the DML number for this input, but for larger genomes you will get better results if you use a much larger input seed number.
 # Since no over-compression is detected, we can simply use the largest seed value tested - 2940 (980 x 3)
 DMRs <- Get_Novel_DMRs(ranks, 2940, DMR_resolution=200, minCpGs=10) # (2) call DMRs based on the optimal seed number
 head(DMRs[order(DMRs$FDR, decreasing = F),])
