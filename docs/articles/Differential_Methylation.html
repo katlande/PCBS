@@ -219,11 +219,7 @@ system has the lowest false call rate compared to other tested softwares
 (false positive + false negative). Basepair for basepair, most other DMR
 callers dramatically over predict the size of DMR regions compared to
 the present method.</p>
-<p>Our DMR calling algorithm works by defining a rank cut-off, wherein
-CpGs below this rank are extracted as seeds. Nearby CpGs are collapsed
-into single seed points at their median. The function expands outwards
-from each seed point up to a maximum DMR size, then identifies the
-smallest expansion containing over 90% of the most variable CpGs</p>
+<p>Our DMR calling algorithm works by defining a rank cut-off, wherein CpGs below this rank are extracted as seeds. Nearby CpGs are collapsed into single seed points at their median. The function expands outwards from each seed point up to a maximum DMR size, then identifies the smallest expansion containing over 90% of the most variable CpGs. In general, the only downside to using a larger number of seeds is that the DMR calling will take more time. However, with smaller or more sparse genomes, you can run into a problem called "overcompression." This occurs when seeds from multiple DMRs are collapsed into single points, and can be avoided by running your candidate seed number through the find_best_nSeed() function. If the function finds no overcompression, you are clear to use any of the seed numbers it checked (x-axis values below). In general, as long as you are not overcompressing, increasing the number of seeds will increase your true postive calls without increasing your false positive calls. A smaller seed number will only find highly significant DMRs, while a larger seed number will be able to identify a greater number of more weakly significant DMRs. To optimize DMR calling, use a seed number that is just below the overcompression limit.</p>
 <div class="section level5">
 <h5 id="dmr-calling-occurs-in-two-steps">DMR calling occurs in two steps:<a class="anchor" aria-label="anchor" href="#dmr-calling-occurs-in-two-steps"></a>
 </h5>
