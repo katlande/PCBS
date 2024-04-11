@@ -56,7 +56,7 @@ Get_Novel_DMRs <- function(ranks, nSeeds, chromDictObj=NULL, DMR_resolution=NULL
   }
 
   if(is.null(DMR_resolution)){
-    DMR_resolution <- floor(QueryLimit/15)
+    DMR_resolution <- floor(QueryLimit/25)
   }
 
   if(DMR_resolution==0){
