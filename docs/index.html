@@ -17,22 +17,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-<style>
-code {
-  font-family: Consolas,"courier new";
-  color: crimson;
-  background-color: #f1f1f1;
-  padding: 2px;
-  font-size: 105%;
-}
-table, th, td {
-  border:0px solid black;
-  padding-top: 0px;
-  padding-bottom: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-}    
-</style>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -58,6 +42,7 @@ table, th, td {
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="articles/Differential_Methylation.html">Differential Methylation with PCBS</a>
+    <a class="dropdown-item" href="articles/Optimizing_DMR_Calling.html">Optimizing DMR Calling</a>
   </div>
 </li>
       </ul>
@@ -82,55 +67,34 @@ table, th, td {
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="pcbs---principle-component-bisulfite">PCBS - Principle Component BiSulfite<a class="anchor" aria-label="anchor" href="#pcbs---principle-component-bisulfite"></a>
 </h1></div>
+<p>See our <a href="https://katlande.github.io/PCBS/index.html" class="external-link">package site</a></p>
 <div class="section level2">
 <h2 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
 </h2>
-<p>PCBS is an R package with the following dependencies:</p>
-<ul>
-  <li>data.table</li>
-  <li>dplyr</li>
-  <li>ggplot2</li>
-  <li>ggrepel</li>
-  <li>tibble</li>
-</ul>
-    
+<p>PCBS is an R package with the following dependencies: * tibble * ggrepel * ggplot2 * dplyr * data.table</p>
 </div>
-<br>
 <div class="section level2">
 <h2 id="data-setup">Data Setup<a class="anchor" aria-label="anchor" href="#data-setup"></a>
 </h2>
-<p>PCBS is a tool for analyzing WGBS datasets in a fast, flexible, and accurate fashion. PCBS is designed to pipe in Bismark-aligned WGBS data. The PCBS input file can be generated from bismark .cov files with the provided <a href="https://github.com/katlande/PCBS/blob/main/Bismark2Matrix.R">Bismark2Matrix.R</a> script.</p>
-<p>Usage: <code>Rscript –vanilla Bismark2Matrix.R file_path file_tsv file_out</code></p>
-<ul>
-<li>file_path = /path/to/cov/files</li>
-<li>file_tsv = A three column, tab-separated file in this format:</li>
-</ul>
-<table style="width:100%">
-  <tr>
-    <th>filename</th>
-    <th>sample</th>
-    <th>group</th>
-  </tr>
-  <tr>
-    <td>sam1.cov</td>
-    <td>s1_trt</td>
-    <td>trt</td>
-  </tr>
-  <tr>
-    <td>sam2.cov</td>
-    <td>s2_ctl</td>
-    <td>ctl</td>
-  </tr>
-</table>
+<p>PCBS is a tool for analyzing WGBS datasets in a fast, flexible, and accurate fashion. PCBS is designed to pipe in Bismark-aligned WGBS data. The PCBS input file can be generated from bismark .cov files with the provided Bismark2Matrix.R script.</p>
+<p>Usage: Rscript –vanilla Bismark2Matrix.R file_path file_tsv file_out * file_path = /path/to/cov/files * file_tsv = A three column, tab-separated file in this format: * filename | sample | group * sam1.cov | s1_trt | trt * sam2.cov | s2_ctl | ctl</p>
 <ul>
 <li>file_out = output file name</li>
 </ul>
+<div class="section level4">
+<h4 id="important-note-pcbs-cannot-handle-cpgs-that-are-na-an-any-sample-and-these-are-removed-by-bismark2matrixr-for-this-reason-pcbs-is-not-recommended-for-sparse-datasets">Important note: PCBS cannot handle CpGs that are NA an any sample, and these are removed by Bismark2Matrix.R. For this reason, PCBS is not recommended for sparse datasets.<a class="anchor" aria-label="anchor" href="#important-note-pcbs-cannot-handle-cpgs-that-are-na-an-any-sample-and-these-are-removed-by-bismark2matrixr-for-this-reason-pcbs-is-not-recommended-for-sparse-datasets"></a>
+</h4>
+</div>
 </div>
 <div class="section level2">
-<br>
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><code>devtools::install_github(“katlande/PCBS”)</code></p>
+<p>devtools::install_github(“katlande/PCBS”)</p>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<p>See our <a href="https://katlande.github.io/PCBS/articles/Differential_Methylation.html" class="external-link">vignette</a></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
