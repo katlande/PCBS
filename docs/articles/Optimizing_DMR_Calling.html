@@ -110,12 +110,10 @@ occurring.</p>
 <span><span class="va">ranks</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getPCRanks.html">getPCRanks</a></span><span class="op">(</span><span class="va">eigen</span>, IDs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"trt"</span>, <span class="st">"ctl"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/CheckOvercompression.html">CheckOvercompression</a></span><span class="op">(</span><span class="va">ranks</span>, <span class="fl">1000</span><span class="op">)</span> <span class="co"># no overcompression</span></span>
-<span><span class="co">## </span></span>
 <span><span class="co">## Checking 13 seed values for best DMR calling............. done!</span></span></code></pre></div>
 <p><img src="Optimizing_DMR_Calling_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/CheckOvercompression.html">CheckOvercompression</a></span><span class="op">(</span><span class="va">ranks</span>, <span class="fl">15000</span><span class="op">)</span> <span class="co"># overcompression at 33,750 seeds</span></span>
-<span><span class="co">## </span></span>
 <span><span class="co">## Checking 13 seed values for best DMR calling............. done!</span></span></code></pre></div>
 <p><img src="Optimizing_DMR_Calling_files/figure-html/unnamed-chunk-2-2.png" width="700"></p>
 <p>While this function is relatively fast, it should be used as a
@@ -135,20 +133,6 @@ and select the input value that returns the most significant DMRs:</p>
 <span>  <span class="va">DMR</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Get_Novel_DMRs.html">Get_Novel_DMRs</a></span><span class="op">(</span><span class="va">ranks</span>, <span class="va">seed</span>, chromDictObj <span class="op">=</span> <span class="va">chrDict</span>, DMR_resolution<span class="op">=</span><span class="fl">200</span>, minCpGs<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sig</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">DMR</span><span class="op">[</span><span class="va">DMR</span><span class="op">$</span><span class="va">FDR</span> <span class="op">&lt;=</span> <span class="fl">0.05</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">sig</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Trimming 21 DMRs... done!</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Trimming 52 DMRs... done!</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Trimming 67 DMRs... done!</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Trimming 81 DMRs... done!</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Trimming 137 DMRs... done!</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Trimming 347 DMRs... done!</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Trimming 1077 DMRs... done!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>nSeeds<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">500</span>, <span class="fl">1000</span>, <span class="fl">2000</span>, <span class="fl">3000</span>, <span class="fl">5000</span>, <span class="fl">10000</span><span class="op">)</span>,</span>
 <span>           nDMRs<span class="op">=</span><span class="va">sig</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">nSeeds</span>, y<span class="op">=</span><span class="va">nDMRs</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -158,7 +142,7 @@ and select the input value that returns the most significant DMRs:</p>
 lower than the global overcompression value of 33,750 seeds. We can see
 a similar result the below data from Cole et. al 2017’s mouse wildtype
 data:</p>
-<p>insert find_best_nseed, DMR num vs. num seed, time vs. num seed</p>
+<p><img src="Optimizing_DMR_Calling_files/cole_et_al_stats.png" width="700"></p>
 <p>Here, CheckOvercompression() finds global overcompression occurring
 around 5 million seeds (A), while total DMR calls actually peak at
 around 100,000 seeds (B). Moreover, increasing seed number appears to
@@ -173,7 +157,7 @@ around 8 millions CpGs after filtering, and one from 2022 with around 20
 million CpGs after filtering. Though more testing is required to state
 confidently, we suspect this to be a good expected optimal seed value
 range for most datasets.</p>
-<p>Cole and Aaron seeds vs hit DMRs</p>
+<p><img src="Optimizing_DMR_Calling_files/Seed_Input_vs_Output.png" width="700"></p>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
