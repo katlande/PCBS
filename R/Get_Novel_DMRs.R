@@ -97,7 +97,7 @@ Get_Novel_DMRs <- function(ranks, nSeeds, chromDictObj=NULL, DMR_resolution=NULL
 
   regions_list <- DMRs[[2]]
   DMRs <- DMRs[[1]]
-  cat(paste0("\nTrimming ", nrow(DMRs)," DMRs..."))
+  message(paste0("Trimming ", nrow(DMRs)," DMRs..."))
   for(i in 1:nrow(DMRs)){
     trimDMR(DMRs[i,], regions_list[[i]], minCpGs, QueryLimit, nulls_sum, nulls) -> d
     if(is.character(d)){

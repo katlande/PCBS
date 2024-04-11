@@ -3,7 +3,7 @@ CheckOvercompression <- function(ranks, CpG_cutoff=NULL,
                             values=c(0.6,0.8,0.9,1,1.15,1.3,1.5,1.75,2,2.25,2.5,2.75,3),
                             max.dmr.size=5000, return.plot=T){
 
-  cat(paste0("\nChecking ",length(values), " seed values for best DMR calling"))
+  message(paste0("Checking ",length(values), " seed values for best DMR calling"))
 
   if(! "abs.order" %in% colnames(ranks)){
     addRanks(ranks)->ranks
