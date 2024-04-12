@@ -42,6 +42,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Differential_Methylation.html">Differential Methylation with PCBS</a>
+    <a class="dropdown-item" href="../articles/Optimizing_DMR_Calling.html">Optimizing DMR Calling</a>
   </div>
 </li>
       </ul>
@@ -108,12 +109,12 @@ Bismark outputed .cov files into the below format.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eigen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="st">"WGBS.txt"</span><span class="op">)</span> <span class="co"># https://github.com/katlande/PCBS/WGBS.txt</span></span>
 <span><span class="va">eigen</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
-<span><span class="co">#&gt;          cpgID trt1_PercMeth trt1_nCpG trt2_PercMeth trt2_nCpG</span></span>
-<span><span class="co">#&gt; 1 chr2:2505718     0.5581395        43     0.4084507        71</span></span>
-<span><span class="co">#&gt; 2 chr2:1807326     0.5652174        69     0.4883721        43</span></span>
-<span><span class="co">#&gt; 3 chr2:2490208     0.4489796        49     0.5416667        72</span></span>
-<span><span class="co">#&gt; 4 chr2:5512828     0.5263158        38     0.6315789        19</span></span>
-<span><span class="co">#&gt; 5 chr3:1296629     0.6000000        35     0.4242424        66</span></span></code></pre></div>
+<span><span class="co">##          cpgID trt1_PercMeth trt1_nCpG trt2_PercMeth trt2_nCpG</span></span>
+<span><span class="co">## 1 chr2:2505718     0.5581395        43     0.4084507        71</span></span>
+<span><span class="co">## 2 chr2:1807326     0.5652174        69     0.4883721        43</span></span>
+<span><span class="co">## 3 chr2:2490208     0.4489796        49     0.5416667        72</span></span>
+<span><span class="co">## 4 chr2:5512828     0.5263158        38     0.6315789        19</span></span>
+<span><span class="co">## 5 chr3:1296629     0.6000000        35     0.4242424        66</span></span></code></pre></div>
 <div class="section level5">
 <h5 id="section"></h5>
 </div>
@@ -126,8 +127,8 @@ difference between treatment and control. If multiple PCs delineate the
 conditions, the PC contributing the most variance will be chosen.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/DefineBestPC.html">DefineBestPC</a></span><span class="op">(</span><span class="va">eigen</span>, IDs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"trt"</span>, <span class="st">"ctl"</span><span class="op">)</span><span class="op">)</span> <span class="co"># IDs segregate two conditions based on a common identifier in the column names of the eigen dataframe, rather than by column number. You may have to rename the columns of your input object if no common name exists.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Best PC to use is PC1 with a sample distance of 45.4, representing 29.81% of the total variance.</span></span></code></pre></div>
+<span><span class="co">## </span></span>
+<span><span class="co">## Best PC to use is PC1 with a sample distance of 45.4, representing 29.81% of the total variance.</span></span></code></pre></div>
 <p><img src="Differential_Methylation_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 <div class="section level2">
@@ -140,15 +141,15 @@ methylation in the treatment condition (hypermethylation), whereas
 negative eigenvector scores indicate decreased methylation in the
 treatment condition (hypomethylation).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">getPCRanks</span><span class="op">(</span><span class="va">eigen</span>, IDs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"trt"</span>, <span class="st">"ctl"</span><span class="op">)</span>, PC <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">ranks</span> <span class="co"># Get an eigenvector score for each CpG based on principle component 1</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/getPCRanks.html">getPCRanks</a></span><span class="op">(</span><span class="va">eigen</span>, IDs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"trt"</span>, <span class="st">"ctl"</span><span class="op">)</span>, PC <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">ranks</span> <span class="co"># Get an eigenvector score for each CpG based on principle component 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ranks</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                   PC_Score</span></span>
-<span><span class="co">#&gt; chr2:2505718  3.781088e-05</span></span>
-<span><span class="co">#&gt; chr2:1807326  4.573342e-04</span></span>
-<span><span class="co">#&gt; chr2:2490208  3.156102e-03</span></span>
-<span><span class="co">#&gt; chr2:5512828 -5.695585e-03</span></span>
-<span><span class="co">#&gt; chr3:1296629  2.822282e-03</span></span>
-<span><span class="co">#&gt; chr3:3212276 -6.044066e-03</span></span></code></pre></div>
+<span><span class="co">##                   PC_Score</span></span>
+<span><span class="co">## chr2:2505718  3.781088e-05</span></span>
+<span><span class="co">## chr2:1807326  4.573342e-04</span></span>
+<span><span class="co">## chr2:2490208  3.156102e-03</span></span>
+<span><span class="co">## chr2:5512828 -5.695585e-03</span></span>
+<span><span class="co">## chr3:1296629  2.822282e-03</span></span>
+<span><span class="co">## chr3:3212276 -6.044066e-03</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="identifying-a-dml-cut-off">Identifying a DML cut-off<a class="anchor" aria-label="anchor" href="#identifying-a-dml-cut-off"></a>
@@ -161,7 +162,7 @@ vs. non-differential DMLs, though note that this type of analysis is not
 the primary function of eigenvector analysis.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rankDist.html">rankDist</a></span><span class="op">(</span><span class="va">ranks</span>, mode<span class="op">=</span><span class="st">"intersect"</span><span class="op">)</span> <span class="co"># Two modes "intersect" and "strict"</span></span>
-<span><span class="co">#&gt; Estimated rank cut-off for significant CpGs is 980.</span></span></code></pre></div>
+<span><span class="co">## Estimated rank cut-off for significant CpGs is 980.</span></span></code></pre></div>
 <p><img src="Differential_Methylation_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Generally speaking, the best cut-off rank occurs just above the
 inflection point of the plot of Absolute Rank vs. Absolute Score. The
@@ -174,12 +175,13 @@ CpGs (true variation), and the that of the lowest scoring CpGs
 cut-off simply as half the distance between the maximum rank used to
 define the line of best fit for the highest scoring CpGs and the value
 produced by intersect mode.</p>
-<p>In most cases, PC-intersect is recommended, as it performs better in larger, higher variability genomes. However, in small, low-variability test
+<p>In high variability test genomes, PC-strict and PC-intersect perform
+comparably to each other and other softwares. In low-variability test
 genomes, PC-strict greatly out preforms PC-intersct as well as all other
 tested softwares in false positive reduction, though this comes at the
 cost of a slight increase in false negative calls. Generally, PC-Strict
-should only be used in comparisons where the expected number of true DMLs is
-relatively low, and/or the total genome size is small.</p>
+is better in comparisons where the expected number of true DMLs is
+relatively low.</p>
 <p>Please note that these are simply estimations. If the predicted
 cut-off returned is much higher or much lower than the inflection point
 as demonstrated in the figure above, it is recommended to select a
@@ -188,13 +190,13 @@ cut-off rank manually.</p>
 <code class="sourceCode R"><span><span class="va">DMLs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addRanks.html">addRanks</a></span><span class="op">(</span><span class="va">ranks</span><span class="op">)</span> <span class="co"># add rank order to our CpGs</span></span>
 <span><span class="va">DMLs</span><span class="op">$</span><span class="va">significant</span> <span class="op">&lt;-</span> <span class="va">DMLs</span><span class="op">$</span><span class="va">abs.order</span> <span class="op">&lt;=</span> <span class="fl">980</span> <span class="co"># significant CpG cut-off defined by rankDist() is: 980</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">DMLs</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                 PC_Score order abs.order  chr     pos significant</span></span>
-<span><span class="co">#&gt; chr3:3291453  0.03364091     1         1 chr3 3291453        TRUE</span></span>
-<span><span class="co">#&gt; chr3:31670    0.03343012     2         2 chr3   31670        TRUE</span></span>
-<span><span class="co">#&gt; chr3:3082482  0.03337153     3         3 chr3 3082482        TRUE</span></span>
-<span><span class="co">#&gt; chr2:350483  -0.03296202 50000         4 chr2  350483        TRUE</span></span>
-<span><span class="co">#&gt; chr1:8652017  0.03291018     4         5 chr1 8652017        TRUE</span></span>
-<span><span class="co">#&gt; chr3:4531184 -0.03270712 49999         6 chr3 4531184        TRUE</span></span></code></pre></div>
+<span><span class="co">##                 PC_Score order abs.order  chr     pos significant</span></span>
+<span><span class="co">## chr3:3291453  0.03364091     1         1 chr3 3291453        TRUE</span></span>
+<span><span class="co">## chr3:31670    0.03343012     2         2 chr3   31670        TRUE</span></span>
+<span><span class="co">## chr3:3082482  0.03337153     3         3 chr3 3082482        TRUE</span></span>
+<span><span class="co">## chr2:350483  -0.03296202 50000         4 chr2  350483        TRUE</span></span>
+<span><span class="co">## chr1:8652017  0.03291018     4         5 chr1 8652017        TRUE</span></span>
+<span><span class="co">## chr3:4531184 -0.03270712 49999         6 chr3 4531184        TRUE</span></span></code></pre></div>
 <p>We now have a file with a significance for all CpGs.</p>
 </div>
 <div class="section level2">
@@ -218,30 +220,45 @@ system has the lowest false call rate compared to other tested softwares
 (false positive + false negative). Basepair for basepair, most other DMR
 callers dramatically over predict the size of DMR regions compared to
 the present method.</p>
-<p>Our DMR calling algorithm works by defining a rank cut-off, wherein CpGs below this rank are extracted as seeds. Nearby CpGs are collapsed into single seed points at their median. The function expands outwards from each seed point up to a maximum DMR size, then identifies the smallest expansion containing over 90% of the most variable CpGs.</p> 
-<p>In general, the only downside to using a larger number of seeds is that the DMR calling will take more time. However, with smaller or more sparse genomes, you can run into a problem called "overcompression." This occurs when seeds from multiple DMRs are collapsed into single points, causing the total number of DMRs to be underestimated. The function below can be used to check for overcompression.</p>
-<p>Broadly, as long as you are not overcompressing, increasing the number of seeds will increase your true postive calls without increasing your false positive calls. A smaller seed number will only find highly significant DMRs, while a larger seed number will be able to identify a greater number of more weakly significant DMRs. In general, using a seed number that is about 1-2% of the total filtered CpG number is roughly optimal. To read more about DMR seeds and overcompression, see our vignette on <a href="https://katlande.github.io/PCBS/articles/Optimizing_DMR_Calling.html">Optimizing DMR Calling</a>.</p>
+<p>Our DMR calling algorithm works by defining a rank cut-off, wherein
+CpGs below this rank are extracted as seeds. Nearby CpGs are collapsed
+into single seed points at their median. The function expands outwards
+from each seed point up to a maximum DMR size, then identifies the
+smallest expansion containing over 90% of the most variable CpGs. In
+general, the only downside to using a larger number of seeds is that the
+DMR calling will take more time. However, with smaller or more sparse
+genomes, you can run into a problem called “overcompression.” This
+occurs when seeds from multiple DMRs are collapsed into single points,
+and can be avoided by running your candidate seed number through the
+find_best_nSeed() function. If the function finds no overcompression,
+you are clear to use any of the seed numbers it checked (x-axis values
+below). In general, as long as you are not overcompressing, increasing
+the number of seeds will increase your true postive calls without
+increasing your false positive calls. A smaller seed number will only
+find highly significant DMRs, while a larger seed number will be able to
+identify a greater number of more weakly significant DMRs. To optimize
+DMR calling, use a seed number that is just below the overcompression
+limit.</p>
 <div class="section level5">
 <h5 id="dmr-calling-occurs-in-two-steps">DMR calling occurs in two steps:<a class="anchor" aria-label="anchor" href="#dmr-calling-occurs-in-two-steps"></a>
 </h5>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/CheckOvercompression.html">CheckOvercompression</a></span><span class="op">(</span><span class="va">ranks</span>, <span class="fl">980</span><span class="op">)</span> <span class="co"># (1) identifying the optimal number of seeds to use </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Checking 13 seed values for best DMR calling............. done!</span></span></code></pre></div>
+<span><span class="co">## ............. done!</span></span></code></pre></div>
 <p><img src="Differential_Methylation_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Since no over-compression is detected, we can simply use the largest seed value tested - 2940 (980 x 3)</span></span>
+<code class="sourceCode R"><span><span class="co"># For smaller genomes such as this practice set, we can use the DML number for this input, but for larger genomes you will get better results if you use a much larger input seed number.</span></span>
+<span><span class="co"># Since no over-compression is detected, we can simply use the largest seed value tested - 2940 (980 x 3)</span></span>
 <span><span class="va">DMRs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Get_Novel_DMRs.html">Get_Novel_DMRs</a></span><span class="op">(</span><span class="va">ranks</span>, <span class="fl">2940</span>, DMR_resolution<span class="op">=</span><span class="fl">200</span>, minCpGs<span class="op">=</span><span class="fl">10</span><span class="op">)</span> <span class="co"># (2) call DMRs based on the optimal seed number</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Trimming 135 DMRs... done!</span></span>
+<span><span class="co">##  done!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">DMRs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">DMRs</span><span class="op">$</span><span class="va">FDR</span>, decreasing <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      Chr   Start     End DMR_Zscore nCpGs            p DMR_size          FDR</span></span>
-<span><span class="co">#&gt; 114 chr3 4920450 4923267  -41.29788    24 8.005804e-08     2817 2.882090e-06</span></span>
-<span><span class="co">#&gt; 97  chr3 4140014 4142951  -26.17133    25 1.081729e-07     2937 3.786051e-06</span></span>
-<span><span class="co">#&gt; 93  chr3 1340221 1342791  -27.47889    23 1.236705e-07     2570 4.204797e-06</span></span>
-<span><span class="co">#&gt; 57  chr1 8650728 8652017   64.51441    13 2.839677e-06     1289 9.370935e-05</span></span>
-<span><span class="co">#&gt; 125 chr3 3960576 3962805   15.11025    14 6.495770e-06     2229 2.078646e-04</span></span>
-<span><span class="co">#&gt; 78  chr3 5080015 5081519  -34.50625    10 1.812572e-05     1504 5.618972e-04</span></span></code></pre></div>
+<span><span class="co">##      Chr   Start     End DMR_Zscore nCpGs            p DMR_size          FDR</span></span>
+<span><span class="co">## 114 chr3 4920450 4923267  -40.99819    24 8.303739e-08     2817 2.989346e-06</span></span>
+<span><span class="co">## 97  chr3 4140014 4142951  -25.94876    25 1.146708e-07     2937 4.013480e-06</span></span>
+<span><span class="co">## 93  chr3 1340221 1342791  -27.24966    23 1.303962e-07     2570 4.433472e-06</span></span>
+<span><span class="co">## 57  chr1 8650728 8652017   61.47111    13 2.864087e-06     1289 9.451486e-05</span></span>
+<span><span class="co">## 125 chr3 3960576 3962805   15.12234    14 6.101070e-06     2229 1.952343e-04</span></span>
+<span><span class="co">## 78  chr3 5080015 5081519  -34.24119    10 1.850804e-05     1504 5.737494e-04</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -259,10 +276,10 @@ directly, rather than by querying novel DMR calls for overlaps.</p>
 <span>                      ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Hypo-DMR"</span>, <span class="st">"partial Hyper-DMR"</span>, <span class="st">"random"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">getRegionScores</span><span class="op">(</span><span class="va">DMLs</span>, <span class="va">regions</span><span class="op">)</span></span>
-<span><span class="co">#&gt;             feature       meanPC nCpG          Z            p</span></span>
-<span><span class="co">#&gt; 1          Hypo-DMR -0.020963435   24 -4.6426679 3.804721e-08</span></span>
-<span><span class="co">#&gt; 2 partial Hyper-DMR  0.008092709    8  1.7904906 7.955714e-05</span></span>
-<span><span class="co">#&gt; 3            random -0.003612135    8 -0.8010134 2.596066e-01</span></span></code></pre></div>
+<span><span class="co">##             feature       meanPC nCpG          Z            p</span></span>
+<span><span class="co">## 1          Hypo-DMR -0.020963435   24 -4.7332107 3.821856e-08</span></span>
+<span><span class="co">## 2 partial Hyper-DMR  0.008092709    8  1.8204698 1.026661e-05</span></span>
+<span><span class="co">## 3            random -0.003612135    8 -0.8195847 5.673122e-02</span></span></code></pre></div>
 <p>getRegionScores returns the mean eigenvector scores for each input
 region, as well as Z-score against the background, and a p-value. As you
 can see in our test set, true DMRs and regions partially overlapping
