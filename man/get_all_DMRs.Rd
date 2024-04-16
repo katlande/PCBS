@@ -7,7 +7,8 @@ Nested DMR calling function within Get_Novel_DMRs()
 Expands DMRs from collapsed seeds iteratively.
 }
 \usage{
-get_all_DMRs(chromDictObj, seeds, res=40, max.dmr.size=3000, min.dmr.cpgs=10, min.absZscore, null)
+get_all_DMRs(chromDictObj, seeds, res=40, max.dmr.size=3000, min.dmr.cpgs=10,
+min.absZscore, null)
 }
 
 \arguments{
