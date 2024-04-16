@@ -51,8 +51,7 @@ Get_Novel_DMRs <- function(ranks, nSeeds, chromDictObj=NULL, DMR_resolution=NULL
     names(nulls) <- names(chromDictObj)
     names(nulls_sum) <- names(chromDictObj)
   } else{
-    warning("Error: Data is too sparse to calculate DMRs.")
-    break
+    stop("Error: Data is too sparse to calculate DMRs.")
   }
 
   if(is.null(DMR_resolution)){
