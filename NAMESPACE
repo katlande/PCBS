@@ -4,7 +4,9 @@ import(tibble)
 import(ggrepel)
 import(dplyr, except=c(first,last,between))
 import(data.table)
-
+importFrom("stats", "aggregate", "dist", "lm", "loess", "median",
+             "na.omit", "p.adjust", "prcomp", "quantile", "sd", "t.test",
+             "var")
 
 export(CheckOvercompression)
 export(addRanks)
