@@ -13,7 +13,6 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
   warning = FALSE
 )
 ```
@@ -23,7 +22,7 @@ Eigenvector WGBS analysis is built on the simple premise that in a principle com
 
 Eigenvector values are continuous, and allow for more flexible analyses than those predicated on a p-value cut-off system. In comparison to other common WGBS tools, Eigenvector analysis is generally faster. It shows comparable ability to call differentially methylated loci (DMLs) to current standard tools, and in test genomes is the most accurate differentially methylated region (DMR) calling tool both in terms of the number of DMRs called, as well as the size of DMRs called.
 
-Currently, Eigenvector WGBS analysis is only set up to handle comparisons of two-condition, one-factor experiments. 
+Currently, Eigenvector WGBS analysis is only set up to handle comparisons of two-condition, one-factor experiments.
 
 ```{r setup, message = FALSE}
 library(PCBS)
@@ -32,7 +31,6 @@ library(PCBS)
 ## Reading in our input file
 We provide a script, Bismark2Matrix.R, that can be used to covert Bismark outputed .cov files into the below format.
 ```{r}
-eigen <- read.delim("WGBS.txt") # https://github.com/katlande/PCBS/WGBS.txt
 eigen[1:5,1:5]
 ```
 ##### 
@@ -43,8 +41,7 @@ DefineBestPC(eigen, IDs = c("trt", "ctl")) # IDs segregate two conditions based 
 ```
 
 ## Score each CpG by its eigenvector value
-As PC1 was defined as our best PC, we should set PC=1
-The first condition in the IDs=c() option will always be treated as the treatment. Positive eigenvector scores (PC_Score) mean that there is increased methylation in the treatment condition (hypermethylation), whereas negative eigenvector scores indicate decreased methylation in the treatment condition (hypomethylation).
+As PC1 was defined as our best PC, we should set PC=1 The first condition in the IDs=c() option will always be treated as the treatment. Positive eigenvector scores (PC_Score) mean that there is increased methylation in the treatment condition (hypermethylation), whereas negative eigenvector scores indicate decreased methylation in the treatment condition (hypomethylation).
 ```{r}
 getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1) -> ranks # Get an eigenvector score for each CpG based on principle component 1
 head(ranks)
@@ -58,7 +55,7 @@ rankDist(ranks, mode="intersect") # Two modes "intersect" and "strict"
 ```
 
 
-Generally speaking, the best cut-off rank occurs just above the inflection point of the plot of Absolute Rank vs. Absolute Score. The cut-off can be estimated manually from the plot, or the rankDist() function can be used to estimate the cutoff as above. rankDist() offers two modes. The "intersect" method defines the cut-off as the intersection between the linear line of best fit for the highest scoring CpGs (true variation), and the that of the lowest scoring CpGs (background noise). Alternatively, the "strict" method defines the cut-off simply as half the distance between the maximum rank used to define the line of best fit for the highest scoring CpGs and the value produced by intersect mode. 
+Generally speaking, the best cut-off rank occurs just above the inflection point of the plot of Absolute Rank vs. Absolute Score. The cut-off can be estimated manually from the plot, or the rankDist() function can be used to estimate the cutoff as above. rankDist() offers two modes. The “intersect” method defines the cut-off as the intersection between the linear line of best fit for the highest scoring CpGs (true variation), and the that of the lowest scoring CpGs (background noise). Alternatively, the “strict” method defines the cut-off simply as half the distance between the maximum rank used to define the line of best fit for the highest scoring CpGs and the value produced by intersect mode.
 
 In high variability test genomes, PC-strict and PC-intersect perform comparably to each other and other softwares. In low-variability test genomes, PC-strict greatly out preforms PC-intersct as well as all other tested softwares in false positive reduction, though this comes at the cost of a slight increase in false negative calls. Generally, PC-Strict is better in comparisons where the expected number of true DMLs is relatively low.
 
@@ -84,17 +81,19 @@ gridExtra::grid.arrange(test_50+tilt(), test_500+tilt(), test_5000+tilt(), nrow=
 
 
 ## Calling DMRs
-Differentially methylated region (DMR) calling is where eigenvector analysis shines. In simulated genomes, the eigenvector-based DMR calling system has the lowest false call rate compared to other tested softwares (false positive + false negative). Basepair for basepair, most other DMR callers dramatically over predict the size of DMR regions compared to the present method. 
+Differentially methylated region (DMR) calling is where eigenvector analysis shines. In simulated genomes, the eigenvector-based DMR calling system has the lowest false call rate compared to other tested softwares (false positive + false negative). Basepair for basepair, most other DMR callers dramatically over predict the size of DMR regions compared to the present method.
 
-Our DMR calling algorithm works by defining a rank cut-off, wherein CpGs below this rank are extracted as seeds. Nearby CpGs are collapsed into single seed points at their median. The function expands outwards from each seed point up to a maximum DMR size, then identifies the smallest expansion containing over 90% of the most variable CpGs. In general, the only downside to using a larger number of seeds is that the DMR calling will take more time. However, with smaller or more sparse genomes, you can run into a problem called "overcompression." This occurs when seeds from multiple DMRs are collapsed into single points, and can be avoided by running your candidate seed number through the find_best_nSeed() function. If the function finds no overcompression, you are clear to use any of the seed numbers it checked (x-axis values below). In general, as long as you are not overcompressing, increasing the number of seeds will increase your true postive calls without increasing your false positive calls. A smaller seed number will only find highly significant DMRs, while a larger seed number will be able to identify a greater number of more weakly significant DMRs. To optimize DMR calling, use a seed number that is just below the overcompression limit.
+Our DMR calling algorithm works by defining a rank cut-off, wherein CpGs below this rank are extracted as seeds. Nearby CpGs are collapsed into single seed points at their median. The function expands outwards from each seed point up to a maximum DMR size, then identifies the smallest expansion containing over 90% of the most variable CpGs.
+
+In general, the only downside to using a larger number of seeds is that the DMR calling will take more time. However, with smaller or more sparse genomes, you can run into a problem called "overcompression." This occurs when seeds from multiple DMRs are collapsed into single points, causing the total number of DMRs to be underestimated. The function below can be used to check for overcompression.
+
+Broadly, as long as you are not overcompressing, increasing the number of seeds will increase your true postive calls without increasing your false positive calls. A smaller seed number will only find highly significant DMRs, while a larger seed number will be able to identify a greater number of more weakly significant DMRs. In general, using a seed number that is about 1-2% of the total filtered CpG number is roughly optimal. To read more about DMR seeds and overcompression, see our vignette on [Optimizing DMR Calling](https://katlande.github.io/PCBS/articles/Optimizing_DMR_Calling.html).
 
 
 ##### DMR calling occurs in two steps: 
 ```{r, message = FALSE}
-find_best_nSeed(ranks, 980) # (1) identifying the optimal number of seeds to use 
-# For smaller genomes such as this practice set, we can use the DML number for this input, but for larger genomes you will get better results if you use a much larger input seed number.
-# Since no over-compression is detected, we can simply use the largest seed value tested - 2940 (980 x 3)
-DMRs <- Get_Novel_DMRs(ranks, 2940, DMR_resolution=200, minCpGs=10) # (2) call DMRs based on the optimal seed number
+CheckOvercompression(ranks, 980) # For larger genomes, the target seed number will usually be about 1-2% of the number of rows in the ranks file. But in this small test set, we are just testing values around the DML cut-off.
+DMRs <- Get_Novel_DMRs(ranks, 2940, DMR_resolution=200, minCpGs=10) # No overcompression was detected, so we will just use the largest seed value.
 head(DMRs[order(DMRs$FDR, decreasing = F),])
 ```
 
@@ -122,7 +121,7 @@ score_metagene(ranks, regions_hyper)
 ```
 
 
-Our hypermethylated DMR regions broadly show a highly positive PC-score across the regions. This is what we expect for hypermethylated regions. 
+Our hypermethylated DMR regions broadly show a highly positive PC-score across the regions. This is what we expect for hypermethylated regions.
 
 ##### Plot metagenes of multiple regions together
 ```{r, message = FALSE}
