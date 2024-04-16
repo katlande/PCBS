@@ -19,4 +19,8 @@
 #'  \item{\code{ctl3_nCpG}}{a numeric vector, depth of sample ctl3}
 #'}
 #' @source generated through simulation
+#' @docType data
+#' @keywords datasets
+#' @name eigen
+#' @usage data(eigen)
 "eigen"
