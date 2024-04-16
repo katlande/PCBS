@@ -8,3 +8,9 @@ se(x)
 \arguments{
 \item{x}{numeric vector.}
 }
+
+
+\examples{
+x <- sample(1:100, 20)
+se(x)
+}

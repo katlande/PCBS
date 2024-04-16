@@ -12,3 +12,7 @@ Returns eigenvector scores for input CpG sites.}
 \item{PC}{Integer, which principle component to use. Use to DefineBestPC if unsure.}
 \item{filter_thresh}{Integer, a coverage threshold for filtering, where CpG coverage of all samples must be larger than this value.}
 }
+
+\examples{
+ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
+}

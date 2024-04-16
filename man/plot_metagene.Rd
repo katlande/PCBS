@@ -12,3 +12,20 @@ plot_metagene(data, title, xaxis, yaxis, linecol)
 \item{yaxis}{Output plot y-axis title}
 \item{linecol}{Colour for line, auto="red"}
 }
+
+
+\examples{
+ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
+DMRs <- Get_Novel_DMRs(ranks, 2940, minCpGs=10)
+
+# Select all significantly hypomethylated DMRs:
+hypo_DMRs <- DMRs[DMRs$FDR <= 0.05 & DMRs$DMR_Zscore < 0,] 
+
+# select chrom, start, and end of all hyper DMRs
+regions_hypo <- hypo_DMRs[c(1:3)] 
+
+# return.data = T returns raw data instead of a plot:
+hypo_metagene <- score_metagene(ranks, regions_hypo, return.data = T)
+
+plot_metagene(hypo_metagene)
+}

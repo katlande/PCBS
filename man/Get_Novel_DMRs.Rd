@@ -18,3 +18,7 @@ DMR Calling.}
 \item{perms}{Automatic=1000. Number of permutations to use when defining the null distribution. Increasing this value largely influences computational time with minimal return}
 }
 
+\examples{
+ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
+DMRs <- Get_Novel_DMRs(ranks, 2940, minCpGs=10)
+}

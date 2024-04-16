@@ -16,3 +16,25 @@ multiple_metagenes(data_list, set_names, title, xaxis, yaxis, legend.title, col,
 \item{se_alpha}{0-1, alpha value for standard error shading}
 }
 
+\examples{
+ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
+DMRs <- Get_Novel_DMRs(ranks, 2940, minCpGs=10)
+
+# Select all significantly hypomethylated DMRs:
+hypo_DMRs <- DMRs[DMRs$FDR <= 0.05 & DMRs$DMR_Zscore < 0,] 
+# Select all significantly hypermethylated DMRs:
+hyper_DMRs <- DMRs[DMRs$FDR <= 0.05 & DMRs$DMR_Zscore > 0,]
+
+# select chrom, start, and end of all hyper DMRs
+regions_hypo <- hypo_DMRs[c(1:3)] 
+regions_hyper <- hyper_DMRs[c(1:3)] 
+
+# return.data = T returns raw data instead of a plot:
+hyper_metagene <- score_metagene(ranks, regions_hyper, return.data = T)
+hypo_metagene <- score_metagene(ranks, regions_hypo, return.data = T)
+
+# The multiple_metagenes function plots multiple metagenes using a list of raw data objects from score_metagene().
+multiple_metagenes(data_list = list(hyper_metagene, hypo_metagene),
+set_names = c("Hyper DMRs", "Hypo DMRs"),
+title="Metagenes of DMR Regions", legend.title = F)
+}

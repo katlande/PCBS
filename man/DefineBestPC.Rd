@@ -13,3 +13,6 @@ Defines the best principle component to use for downstream analysis.}
 \item{return.plot}{T/F, whether to return a PCA plot or a numeric representing the best principle component for downstream analysis}
 }
 
+\examples{
+DefineBestPC(eigen, IDs = c("trt", "ctl"))
+}

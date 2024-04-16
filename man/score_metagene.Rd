@@ -18,3 +18,21 @@ chromDictObj, return.data, linecol)
 \item{linecol}{Colour for line, auto="red"}
 }
 
+
+
+\examples{
+ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
+DMRs <- Get_Novel_DMRs(ranks, 2940, minCpGs=10)
+
+# select chrom, start, and end of all hyper DMRs:
+hyper_DMRs <- DMRs[DMRs$FDR <= 0.05 & DMRs$DMR_Zscore > 0,]
+regions_hyper <- hyper_DMRs[c(1:3)] 
+score_metagene(ranks, regions_hyper)
+}
+
+
+
+
+
+
+

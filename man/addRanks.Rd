@@ -9,3 +9,8 @@ Defines the best principle component to use for downstream analysis.}
 \arguments{
 \item{ranks}{getPCRanks output data frame.}
 }
+
+\examples{
+ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"))
+ranks <- addRanks(ranks)
+}

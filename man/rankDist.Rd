@@ -13,3 +13,8 @@ Automated rank cut-off estimator for input CpGs.}
 \item{mode}{"intersect" or "strict", determine cut-off with "intersect" or "strict" method. "Strict" is recommended for sets with lower variability}
 \item{return.plot}{T/F, whether to return a plot or a numeric}
 }
+
+\examples{
+ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
+rankDist(ranks, mode="intersect")
+}
