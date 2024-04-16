@@ -11,7 +11,7 @@ oneSeed(chroms, seed, resolution, max.size, mincpgs, null_list, Zlim=1)
 }
 
 \arguments{
-\item{chromDictObj}{chromDict() output.}
+\item{chroms}{chromDict() output.}
 \item{seed}{seed value input}
 \item{resolution}{Get_Novel_DMRs arg DMR_resolution}
 \item{max.size}{Get_Novel_DMRs arg QueryLimit}
