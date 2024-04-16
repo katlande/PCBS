@@ -2,7 +2,8 @@
 \alias{score_metagene}
 \title{Make a metagene from PC Scores.}
 \usage{
-score_metagene(ranks, regions, bin, title, xaxis, yaxis, chromDictObj, return.data, linecol)
+score_metagene(ranks, regions, bin, title, xaxis, yaxis, 
+chromDictObj, return.data, linecol)
 }
 \description{Uses mean binned PC scores across a set of regions to draw a metagene.}
 \arguments{
