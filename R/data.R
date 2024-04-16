@@ -1,6 +1,6 @@
-#' simulated WGBS data for PCBS vignettes
+#' @title Simulated WGBS data for PCBS vignettes
 #'
-#' simulated WGBS data with added DMRs and DMLs
+#' @description simulated WGBS data with added DMRs and DMLs
 #'
 #' @format A data frame with 50000 observations on the following 13 variables.
 #'\describe{
