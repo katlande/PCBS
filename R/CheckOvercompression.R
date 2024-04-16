@@ -50,7 +50,7 @@ CheckOvercompression <- function(ranks, CpG_cutoff=NULL,
   }
 
   if(return.plot==T){
-    ggplot2::ggplot(d, ggplot2::aes(x=get(n.seeds), y=compressed_seeds))+
+    ggplot2::ggplot(d, ggplot2::aes(x=n.seeds, y=compressed_seeds))+
       ggplot2::geom_point()+ggplot2::geom_line()+Ol_Reliable()+
       ggplot2::xlab("\nn Seeds Input")+ ggplot2::ylab("n Seeds After Compression\n")+
       ggplot2::geom_vline(xintercept = t, linetype="dashed")-> g
