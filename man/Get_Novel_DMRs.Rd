@@ -2,7 +2,8 @@
 \alias{Get_Novel_DMRs}
 \title{Call DMRs from WGBS data.}
 \usage{
-Get_Novel_DMRs(ranks, nSeeds, chromDictObj, DMR_resolution, QueryLimit, minCpGs, minZ, perms)
+Get_Novel_DMRs(ranks, nSeeds, chromDictObj, DMR_resolution, 
+QueryLimit, minCpGs, minZ, perms)
 }
 \description{
 DMR Calling.}
