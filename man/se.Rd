@@ -5,4 +5,4 @@
 se(x)
 }
 \description{Takes the standard error of a vector.}
-
+\item{x}{numeric vector.}
