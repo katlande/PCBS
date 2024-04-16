@@ -24,6 +24,6 @@ multiple_metagenes <- function(data_list, set_names, title="", xaxis="Relative P
 
   # Additional Aesthetic Parameters:
   if(legend.title==F){ g <- g+ggplot2::theme(legend.title = ggplot2::element_blank()) }
-  if(! is.null(col)){ g <- g+sggplot2::cale_colour_manual(values = col)+ggplot2::scale_fill_manual(values = col) }
+  if(! is.null(col)){ g <- g+ggplot2::scale_colour_manual(values = col)+ggplot2::scale_fill_manual(values = col) }
   return(g)
 }
