@@ -18,4 +18,5 @@
 #'  \item{\code{ctl3_PercMeth}}{a numeric vector, percent methylated of sample ctl3}
 #'  \item{\code{ctl3_nCpG}}{a numeric vector, depth of sample ctl3}
 #'}
+#' @source generated through simulation
 "eigen"
