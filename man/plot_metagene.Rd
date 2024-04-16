@@ -25,7 +25,7 @@ hypo_DMRs <- DMRs[DMRs$FDR <= 0.05 & DMRs$DMR_Zscore < 0,]
 regions_hypo <- hypo_DMRs[c(1:3)] 
 
 # return.data = T returns raw data instead of a plot:
-hypo_metagene <- score_metagene(ranks, regions_hypo, return.data = T)
+hypo_metagene <- score_metagene(ranks, regions_hypo, return.data = TRUE)
 
 plot_metagene(hypo_metagene)
 }
