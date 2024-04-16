@@ -1,11 +1,10 @@
 \name{eigen}
-\alias{eigen}
 \docType{data}
 \title{
-%%   ~~ data name/kind ... ~~
+simulated WGBS data for PCBS vignettes
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of the dataset. ~~
+simulated WGBS data with added DMRs and DMLs
 }
 \usage{data("eigen")}
 \format{
