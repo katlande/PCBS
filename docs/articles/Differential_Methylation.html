@@ -107,7 +107,7 @@ comparisons of two-condition, one-factor experiments.</p>
 <p>We provide a script, Bismark2Matrix.R, that can be used to covert
 Bismark outputed .cov files into the below format.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">eigen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="st">"WGBS.txt"</span><span class="op">)</span> <span class="co"># https://github.com/katlande/PCBS/WGBS.txt</span></span>
+<span class="co"># 'eigen' comes preloaded with PCBS, the raw data is also available at https://github.com/katlande/PCBS/WGBS.txt</span></span>
 <span><span class="va">eigen</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
 <span><span class="co">##          cpgID trt1_PercMeth trt1_nCpG trt2_PercMeth trt2_nCpG</span></span>
 <span><span class="co">## 1 chr2:2505718     0.5581395        43     0.4084507        71</span></span>
