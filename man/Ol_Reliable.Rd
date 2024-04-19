@@ -9,8 +9,7 @@ Custom theme for ggplot used by all PCBS output figures.
 \usage{
 Ol_Reliable()
 }
-
-
+\value{Theme for ggplot objects used by PCBS.} 
 \examples{
 df <- data.frame(A=c(1,2,3), B=c(1,2,3))
 

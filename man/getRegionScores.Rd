@@ -9,7 +9,7 @@ getRegionScores(ranks, regions)
 \item{ranks}{getPCRanks output data.frame}
 \item{regions}{A three-column dataframe containing a set of regions to test. Columns = chrom, start, end.}
 }
-
+\value{Returns a \code{data.frame} with significance scores for all input regions.}
 \examples{
 ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
 DMLs <- addRanks(ranks)

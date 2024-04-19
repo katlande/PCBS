@@ -17,9 +17,7 @@ chromDictObj, return.data, linecol)
 \item{return.data}{T/F, whether to return a plot, or data that can be run with plot_metagene() or multiple_metagenes().}
 \item{linecol}{Colour for line, auto="red"}
 }
-
-
-
+\value{If \code{return.data=F}, returns a \code{grob} containing a metagene plot. Otherwise, returns a \code{list} of two \code{data.frames} containing metagene and metagene standard error plotting information.}
 \examples{
 ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
 DMRs <- Get_Novel_DMRs(ranks, 2940, minCpGs=10)

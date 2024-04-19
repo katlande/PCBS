@@ -9,7 +9,6 @@ Trims the edges off of DMR expansions.
 \usage{
 trimDMR(df, region, min.dmr.cpgs, max.dmr.size, null_summary, null_values)
 }
-
 \arguments{
 \item{df}{DMR expansion output dataframe.}
 \item{region}{get_all_DMRs() region output}
@@ -18,3 +17,4 @@ trimDMR(df, region, min.dmr.cpgs, max.dmr.size, null_summary, null_values)
 \item{null_summary}{null distribution conrtainer}
 \item{null_values}{null distribution conrtainer}
 }
+\value{Returns a \code{data.frame} of all trimmed DMRs for use within the \code{Get_Novel_DMRs()} function.}

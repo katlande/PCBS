@@ -13,7 +13,9 @@ Automated rank cut-off estimator for input CpGs.}
 \item{mode}{"intersect" or "strict", determine cut-off with "intersect" or "strict" method. "Strict" is recommended for sets with lower variability}
 \item{return.plot}{T/F, whether to return a plot or a numeric}
 }
-
+\value{
+If \code{return.plot=T}, a \code{grob} plotting the estimated \code{cutoff} on a plot of absolute eigenvector score vs. absolute rank order is returned. Otherwise, a \code{numeric} of the estimated cut-off is returned.
+}
 \examples{
 ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
 rankDist(ranks, mode="intersect")

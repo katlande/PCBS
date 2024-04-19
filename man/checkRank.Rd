@@ -1,6 +1,6 @@
 \name{checkRank}
 \alias{checkRank}
-\title{Check k-values manually.}
+\title{Check rank cut-off values manually.}
 \usage{
 checkRank(ranks, cutoff)
 }
@@ -9,7 +9,9 @@ checkRank(ranks, cutoff)
 \item{ranks}{getPCRanks output data frame}
 \item{cutoff}{integer, rank value to check}
 }
-
+\value{
+Returns a \code{grob} plotting the input \code{cutoff} on a plot of absolute eigenvector score vs. absolute rank order.
+}
 \examples{
 ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
 test_50 <- checkRank(ranks, 50) # set cut-off to 50

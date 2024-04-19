@@ -10,7 +10,6 @@ Expands DMRs from collapsed seeds iteratively.
 get_all_DMRs(chromDictObj, seeds, res=40, max.dmr.size=3000, min.dmr.cpgs=10,
 min.absZscore, null)
 }
-
 \arguments{
 \item{chromDictObj}{chromDict() output.}
 \item{seeds}{compressed seeds}
@@ -20,3 +19,4 @@ min.absZscore, null)
 \item{min.absZscore}{Get_Novel_DMRs arg minZ}
 \item{null}{null distribution}
 }
+\value{Returns a \code{list} with two indicies, representing intermediate DMR calls within the \code{Get_Novel_DMRs()} function and a \code{list} of background regions..}

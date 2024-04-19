@@ -8,9 +8,9 @@ se(x)
 \arguments{
 \item{x}{numeric vector.}
 }
-
-
+\value{Returns a \code{numeric}, representing the standard error of the input vector.} 
 \examples{
 x <- sample(1:100, 20)
 se(x)
 }
+

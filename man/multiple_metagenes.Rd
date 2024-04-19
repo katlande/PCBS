@@ -15,7 +15,7 @@ multiple_metagenes(data_list, set_names, title, xaxis, yaxis, legend.title, col,
 \item{col}{Vector of colours to use for lines}
 \item{se_alpha}{0-1, alpha value for standard error shading}
 }
-
+\value{Returns a \code{grob} containing a plot of the input metagene data.}
 \examples{
 ranks <- getPCRanks(eigen, IDs = c("trt", "ctl"), PC = 1)
 DMRs <- Get_Novel_DMRs(ranks, 2940, minCpGs=10)

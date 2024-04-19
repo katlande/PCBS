@@ -9,3 +9,4 @@ Wrapper to title x-axis text in ggplot objects.
 \usage{
 tilt()
 }
+\value{Theme for ggplot objects that cleanly rotates x-axis text.} 
