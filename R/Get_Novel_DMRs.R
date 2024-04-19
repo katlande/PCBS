@@ -109,8 +109,6 @@ Get_Novel_DMRs <- function(ranks, nSeeds, chromDictObj=NULL, DMR_resolution=NULL
   DMRs <- DMRs[DMRs$nCpGs >= minCpGs,]
   colnames(DMRs) <- c("Chr", "Start", "End", "DMR_Zscore", "nCpGs", "p", "DMR_size")
 
-  #print((Sys.time()-time_s))
-
   DMRs$FDR <- p.adjust(DMRs$p)
   message("done!")
   return(DMRs)
