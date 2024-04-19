@@ -112,6 +112,6 @@ Get_Novel_DMRs <- function(ranks, nSeeds, chromDictObj=NULL, DMR_resolution=NULL
   #print((Sys.time()-time_s))
 
   DMRs$FDR <- p.adjust(DMRs$p)
-  cat(" done!\n")
+  message("done!")
   return(DMRs)
 }
