@@ -13,7 +13,6 @@ CheckOvercompression <- function(ranks, CpG_cutoff=NULL,
 
   compressed_seeds <- c()
   for(v in values){
-    cat(".")
     tmp_cut <- ifelse(is.null(CpG_cutoff), as.integer(v), as.integer(CpG_cutoff*v))
     tmp <- c()
     sub <- row.names(ranks)[1:tmp_cut]
@@ -29,7 +28,7 @@ CheckOvercompression <- function(ranks, CpG_cutoff=NULL,
     }
     compressed_seeds <- c(compressed_seeds, sum(tmp))
   }
-  cat(" done!")
+  message("done!")
 
   if(is.null(CpG_cutoff)){
     data.frame(n.seeds=values,
