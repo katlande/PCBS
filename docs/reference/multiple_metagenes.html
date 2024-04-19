@@ -85,6 +85,10 @@
 <dd><p>0-1, alpha value for standard error shading</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a <code>grob</code> containing a plot of the input metagene data.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -96,8 +100,8 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> done! Collapsed 2940 seeds to 250 seeds!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Expanding DMRs from 250 seeds...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Trimming 135 DMRs...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  done!</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Trimming 133 DMRs...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> done!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Select all significantly hypomethylated DMRs:</span></span></span>
 <span class="r-in"><span><span class="va">hypo_DMRs</span> <span class="op">&lt;-</span> <span class="va">DMRs</span><span class="op">[</span><span class="va">DMRs</span><span class="op">$</span><span class="va">FDR</span> <span class="op">&lt;=</span> <span class="fl">0.05</span> <span class="op">&amp;</span> <span class="va">DMRs</span><span class="op">$</span><span class="va">DMR_Zscore</span> <span class="op">&lt;</span> <span class="fl">0</span>,<span class="op">]</span> </span></span>
