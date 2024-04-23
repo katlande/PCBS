@@ -25,7 +25,7 @@ Usage: Rscript --vanilla  Bismark2Matrix.R file_path file_tsv file_out
 
 
 ## Installation
-devtools::install_github("katlande/PCBS")
+install.packages("PCBS")
 
 
 ## Usage
