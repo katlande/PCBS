@@ -1,9 +1,9 @@
 Package: PCBS
 Type: Package
-Title: Principle Component BiSulfite
+Title: Principal Component BiSulfite
 Version: 0.1.0
 Authors@R: c(person("Kathryn", "Lande", email="kathryn.lande@mail.mcgill.ca", role=c("aut", "cre", "cph")))
-Description: A system for fast, accurate, and flexible whole genome bisulfite sequencing (WGBS) data analysis of two-condition comparisons. Principle Component BiSulfite, 'PCBS', assigns methylated loci eigenvector values from the treatment-delineating principal component in lieu of running millions of pairwise statistical tests, which dramatically increases analysis flexibility and reduces computational requirements. Methods: <https://katlande.github.io/PCBS/articles/Differential_Methylation.html>. 
+Description: A system for fast, accurate, and flexible whole genome bisulfite sequencing (WGBS) data analysis of two-condition comparisons. Principal Component BiSulfite, 'PCBS', assigns methylated loci eigenvector values from the treatment-delineating principal component in lieu of running millions of pairwise statistical tests, which dramatically increases analysis flexibility and reduces computational requirements. Methods: <https://katlande.github.io/PCBS/articles/Differential_Methylation.html>. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
