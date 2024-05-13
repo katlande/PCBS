@@ -82,12 +82,12 @@ Lande</h4>
     
     
 <p>Eigenvector WGBS analysis is built on the simple premise that in a
-principle components analysis of all CpGs in a whole genome bisulfite
+principal components analysis of all CpGs in a whole genome bisulfite
 seq (WGBS) experiment, the eigenvector values of each CpG in the
-principle component that best defines the treatment can be used as a
-quantitative score for comparative analysis. Simply put: if a principle
+principal component that best defines the treatment can be used as a
+quantitative score for comparative analysis. Simply put: if a principal
 component strongly delineates two conditions, then the contribution of a
-single CpG to that principle component will be larger if that CpG is
+single CpG to that principal component will be larger if that CpG is
 highly different between conditions.</p>
 <p>Eigenvector values are continuous, and allow for more flexible
 analyses than those predicated on a p-value cut-off system. In
@@ -119,9 +119,9 @@ Bismark outputed .cov files into the below format.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="defining-our-best-principle-component">Defining our best principle component<a class="anchor" aria-label="anchor" href="#defining-our-best-principle-component"></a>
+<h2 id="defining-our-best-principal-component">Defining our best principal component<a class="anchor" aria-label="anchor" href="#defining-our-best-principal-component"></a>
 </h2>
-<p>Here we identify which principle component (PC) best defines the
+<p>Here we identify which principal component (PC) best defines the
 difference between treatment and control. If multiple PCs delineate the
 conditions, the PC contributing the most variance will be chosen.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -140,7 +140,7 @@ methylation in the treatment condition (hypermethylation), whereas
 negative eigenvector scores indicate decreased methylation in the
 treatment condition (hypomethylation).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/getPCRanks.html">getPCRanks</a></span><span class="op">(</span><span class="va">eigen</span>, IDs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"trt"</span>, <span class="st">"ctl"</span><span class="op">)</span>, PC <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">ranks</span> <span class="co"># Get an eigenvector score for each CpG based on principle component 1</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/getPCRanks.html">getPCRanks</a></span><span class="op">(</span><span class="va">eigen</span>, IDs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"trt"</span>, <span class="st">"ctl"</span><span class="op">)</span>, PC <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">ranks</span> <span class="co"># Get an eigenvector score for each CpG based on principal component 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ranks</span><span class="op">)</span></span>
 <span><span class="co">##                   PC_Score</span></span>
 <span><span class="co">## chr2:2505718  3.781088e-05</span></span>
