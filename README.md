@@ -1,4 +1,4 @@
-# PCBS - Principle Component BiSulfite
+# PCBS - Principal Component BiSulfite
 See our [package site](https://katlande.github.io/PCBS/index.html) 
 
 ## Dependencies
