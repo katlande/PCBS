@@ -35,7 +35,7 @@ methylDiff_metagene <- function(chromDictMethObj=NULL, regions, bin=100, title="
       ggplot2::geom_smooth(colour=linecol, se=F, formula = y ~ x, method = "loess")+
       Ol_Reliable()+ ggplot2::xlab(xaxis)+ ggplot2::ylab(paste0(yaxis, "\n"))+ ggplot2::ggtitle(title)+
       ggplot2::scale_x_continuous(expand=c(0,0))+
-      ggplot2::scale_y_continuous(expand=c(0,0), limits=c(-1,1) -> g
+      ggplot2::scale_y_continuous(expand=c(0,0), limits=c(-1,1)) -> g
     
     return(g)
   } else {
