@@ -2,7 +2,7 @@
 \alias{chromDictMeth}
 \title{Create a chromDict of percent methylation difference at all sites.}
 \usage{
-chromDict(mat, IDs, filter_thresh)
+chromDictMeth(mat, IDs, filter_thresh)
 }
 \description{
 chromDicts are lists of keyed data.tables that enable very fast computing times. Much like the primary PCBS function chromDict() which makes a chromDict of all locus ranks, the chromDictMeth() function makes is a list of chromosome-specific data.tables containing percent methylation differences at all loci..}
