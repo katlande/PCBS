@@ -94,9 +94,9 @@ highly different between conditions.</p>
 analyses than those predicated on a p-value cut-off system. In
 comparison to other common WGBS tools, Eigenvector analysis is generally
 faster. It shows comparable ability to call differentially methylated
-loci (DMLs) to current standard tools, and in test genomes is the most
-accurate differentially methylated region (DMR) calling tool both in
-terms of the number of DMRs called, as well as the size of DMRs
+loci (DMLs) to current standard tools, and in test genomes it shows 
+remarkably accurate differentially methylated region (DMR) calling both 
+in terms of the number of DMRs called, as well as the size of DMRs
 called.</p>
 <p>Currently, Eigenvector WGBS analysis is only set up to handle
 comparisons of two-condition, one-factor experiments.</p>
@@ -177,7 +177,7 @@ define the line of best fit for the highest scoring CpGs and the value
 produced by intersect mode.</p>
 <p>In high variability test genomes, PC-strict and PC-intersect perform
 comparably to each other and other softwares. In low-variability test
-genomes, PC-strict greatly out preforms PC-intersct as well as all other
+genomes, PC-strict greatly out preforms PC-intersct as well most other
 tested softwares in false positive reduction, though this comes at the
 cost of a slight increase in false negative calls. Generally, PC-Strict
 is better in comparisons where the expected number of true DMLs is
@@ -197,7 +197,10 @@ cut-off rank manually.</p>
 <span><span class="co">## chr2:350483  -0.03296202 50000         4 chr2  350483        TRUE</span></span>
 <span><span class="co">## chr1:8652017  0.03291018     4         5 chr1 8652017        TRUE</span></span>
 <span><span class="co">## chr3:4531184 -0.03270712 49999         6 chr3 4531184        TRUE</span></span></code></pre></div>
-<p>We now have a file with a significance for all CpGs.</p>
+<p>We now have a file with a boolean "significance" for all CpGs.
+For users who wish to look at differential loci exclusively, we
+recommend using a package that calculates true p-values at the 
+locus level, such as <a href="https://bioconductor.org/packages/release/bioc/html/DSS.html" class="external-link">DSS</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="identifying-a-dml-cut-off-manually">Identifying a DML cut-off manually<a class="anchor" aria-label="anchor" href="#identifying-a-dml-cut-off-manually"></a>
@@ -216,7 +219,7 @@ imperfect. In such cases, cut-off values can be tested manually:</p>
 </h2>
 <p>Differentially methylated region (DMR) calling is where eigenvector
 analysis shines. In simulated genomes, the eigenvector-based DMR calling
-system has the lowest false call rate compared to other tested softwares
+system has an extremely low false call rate compared to other tested softwares
 (false positive + false negative). Basepair for basepair, most other DMR
 callers dramatically over predict the size of DMR regions compared to
 the present method.</p>
