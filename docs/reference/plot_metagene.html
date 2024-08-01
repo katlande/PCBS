@@ -25,6 +25,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Differential_Methylation.html">Differential Methylation with PCBS</a>
+    <a class="dropdown-item" href="../articles/Manipulating_Percent_Methylation.html">Manipulating Percent Methylation</a>
     <a class="dropdown-item" href="../articles/Optimizing_DMR_Calling.html">Optimizing DMR Calling</a>
   </div>
 </li>
@@ -102,6 +103,7 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># return.data = T returns raw data instead of a plot:</span></span></span>
 <span class="r-in"><span><span class="va">hypo_metagene</span> <span class="op">&lt;-</span> <span class="fu"><a href="score_metagene.html">score_metagene</a></span><span class="op">(</span><span class="va">ranks</span>, <span class="va">regions_hypo</span>, return.data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating chromDict Object. If you plant to run the score_metagene() function multiple times, it is strongly recommended to generate a chromDict Object with the chromDict() function, and specify it with score_metagene(..., chromDictObj=OBJECT). This is the most computationally intensive part of metagene creation, and only needs to be done once.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">plot_metagene</span><span class="op">(</span><span class="va">hypo_metagene</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_metagene-1.png" alt="" width="700" height="433"></span>
