@@ -232,11 +232,11 @@ points, causing the total number of DMRs to be underestimated. The
 function below can be used to check for overcompression.</p>
 <p>Broadly, as long as you are not overcompressing, increasing the
 number of seeds will increase your true postive calls without increasing
-your false positive calls. A smaller seed number will only find highly
+your false positive calls. A smaller seed number will find fewer
 significant DMRs, while a larger seed number will be able to identify a
-greater number of more weakly significant DMRs. In general, using a seed
-number that is about 1-2% of the total filtered CpG number is roughly
-optimal. To read more about DMR seeds and overcompression, see our
+greater number of DMRs at the cost of computing time. In general, the 
+number of significant DMR calls plateaus at a seed number ~1-3% of the 
+total filtered CpGs. To read more about DMR seeds and overcompression, see our
 vignette on <a href="https://katlande.github.io/PCBS/articles/Optimizing_DMR_Calling.html" class="external-link">Optimizing
 DMR Calling</a>.</p>
 <div class="section level5">
