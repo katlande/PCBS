@@ -7,7 +7,7 @@ getRegionScores <- function(ranks, regions){
   }
 
   unlist(lapply(1:1000, function(x){
-    ranks$PC_Score[sample(1:nrow(ranks), 100)]
+    mean(ranks$PC_Score[sample(1:nrow(ranks), 100)])
   })) -> n
   upop <- mean(n)
   sdpop <- sd(n)
