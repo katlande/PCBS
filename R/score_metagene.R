@@ -3,7 +3,7 @@ score_metagene <- function(ranks, regions, bin=100, title="", xaxis="Relative Po
                            yaxis="PC Score", chromDictObj=NULL, return.data=F, linecol="red"){
 
   if(is.null(chromDictObj)){
-    message("Creating chromDict Object. To speed up computing times, this object can be generated with the chromDict() function, and specified with score_metagene(..., chromDictObj=OBJECT).")
+    message("Creating chromDict Object. If you plant to run the score_metagene() function multiple times, it is strongly recommended to generate with the chromDict() function, and specify it with score_metagene(..., chromDictObj=OBJECT). This is the most computationally intensive part of metagene creation, and only needs to be done once.")
     chromDict(ranks) -> chromDictObj
   }
 
