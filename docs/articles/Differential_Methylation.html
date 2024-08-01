@@ -42,6 +42,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Differential_Methylation.html">Differential Methylation with PCBS</a>
+    <a class="dropdown-item" href="articles/Manipulating_Percent_Methylation.html">Manipulating Percent Methylation</a>
     <a class="dropdown-item" href="../articles/Optimizing_DMR_Calling.html">Optimizing DMR Calling</a>
   </div>
 </li>
@@ -284,7 +285,13 @@ can see in our test set, true DMRs and regions partially overlapping
 true DMRs are significant, whereas random regions do not show
 enrichment. Of note, the Z-scores calculated by this function and those
 calculated by Get_Novel_DMRs() are not directly comparable, as getRegionScores()
-only samples the genomic background, but does not bootstrap it. </p>
+only samples the genomic background, but does not bootstrap it. In both the case
+of novel DMRs and known regions, Z-scores strongly correlate to the true
+mean percent methylation at a region, where larger Z-scores indicate a greater
+difference between treatment and control, and the sign of the Z-score indicates
+whether the difference is larger or smaller in the treatment. However, PCBS also
+offers functionality that allows users to investigate the percent methylation difference
+across regions. Cee our article on <a href="https://katlande.github.io/PCBS/articles/Manipulating_Percent_Methylation.html" class="external-link">Manipulating Percent Methylation</a>.</p> </p>
 </div>
 <div class="section level2">
 <h2 id="metagenes">Metagenes<a class="anchor" aria-label="anchor" href="#metagenes"></a>
@@ -324,7 +331,8 @@ regions.</p>
 <span>                   title<span class="op">=</span><span class="st">"Metagenes of DMR Regions"</span>, legend.title <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Differential_Methylation_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <p>As expected, our hypo-DMRs show very negative PC-score across the
-regions.</p>
+regions. To learn how to make metagenes using percent methylation difference instead
+of PC score, see our article on <a href="https://katlande.github.io/PCBS/articles/Manipulating_Percent_Methylation.html" class="external-link">Manipulating Percent Methylation</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
