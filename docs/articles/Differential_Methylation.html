@@ -282,7 +282,9 @@ directly, rather than by querying novel DMR calls for overlaps.</p>
 region, as well as Z-score against the background, and a p-value. As you
 can see in our test set, true DMRs and regions partially overlapping
 true DMRs are significant, whereas random regions do not show
-enrichment.</p>
+enrichment. Of note, the Z-scores calculated by this function and those
+calculated by Get_Novel_DMRs() are not directly comparable, as getRegionScores()
+only samples the genomic background, but does not bootstrap it. </p>
 </div>
 <div class="section level2">
 <h2 id="metagenes">Metagenes<a class="anchor" aria-label="anchor" href="#metagenes"></a>
