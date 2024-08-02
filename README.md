@@ -25,8 +25,12 @@ Usage: Rscript --vanilla  Bismark2Matrix.R file_path file_tsv file_out
 
 
 ## Installation
+
+#### Install the published version
 install.packages("PCBS")
 
+#### Install the latest updates
+remotes::install_github("katlande/PCBS")
 
 ## Usage
 See our [vignette](https://katlande.github.io/PCBS/articles/Differential_Methylation.html)
