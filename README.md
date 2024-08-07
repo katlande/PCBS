@@ -10,11 +10,11 @@ PCBS is an R package with the following dependencies:
 * data.table
 
 ## Data Setup
-PCBS is a tool for analyzing WGBS datasets in a fast, flexible, and accurate fashion. PCBS is designed to pipe in Bismark-aligned WGBS data. The PCBS input file can be generated from bismark .cov files with the provided Bismark2Matrix scripts (we offer scripts for R and Python with identical usage). *We recommend using the Python version of this script as it is faster, but for those more comfortable with R the final output is identical.*
+PCBS is a tool for analyzing WGBS datasets in a fast, flexible, and accurate fashion. PCBS is designed to pipe in Bismark-aligned WGBS data. The PCBS input file can be generated from bismark .cov files with the provided Bismark2Matrix scripts (we offer scripts for R and Python with identical usage and output). **We recommend using the Python version of this script as it is faster.**
 
-Python Usage: `python Bismark2Matrix.py file_path file_tsv file_out`
+Python Usage: `python Bismark2Matrix.py -p file_path -i file_tsv -o file_out`
 
-R Usage: `Rscript --vanilla  Bismark2Matrix.R -p file_path -i file_tsv -o file_out`
+R Usage: `Rscript --vanilla  Bismark2Matrix.R file_path file_tsv file_out`
 
 For both Python and R, the inputs are identical:
 * file_path = /path/to/cov/files
