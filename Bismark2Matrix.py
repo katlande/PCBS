@@ -19,11 +19,15 @@ def main(argv):
          print('\n--- Bismark2Matrix Required Inputs ---\n\n\t-i | --file_tsv\t\t<tab-delimited input sample file (filename, sample, group)>\n\t-o | --file_out\t\t<output file name>\n\t-p | --file_path\t<path to input files>\n\n')
          sys.exit()
       elif opt in ("-i", "--file_tsv"):
-         samples = arg
+         file_tsv = arg
       elif opt in ("-o", "--file_out"):
-         outPath = arg
+         file_out = arg
       elif opt in ("-p", "--file_path"):
-         inPath = arg
+         file_path = arg
+   
+   samples=file_tsv
+   outPath=file_out
+   inPath=file_path
    
    dfList =[]
    sample_file = pd.read_csv(samples, sep="\t",  low_memory=False)
