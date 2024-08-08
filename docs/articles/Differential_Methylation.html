@@ -278,11 +278,11 @@ directly, rather than by querying novel DMR calls for overlaps.</p>
 <span>                      e<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4923267</span>, <span class="fl">3963805</span>, <span class="fl">302900</span><span class="op">)</span>,</span>
 <span>                      ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Hypo-DMR"</span>, <span class="st">"partial Hyper-DMR"</span>, <span class="st">"random"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">getRegionScores</span><span class="op">(</span><span class="va">DMLs</span>, <span class="va">regions</span><span class="op">)</span></span>
+<span><span class="fu">getRegionScores</span><span class="op">(<span class="fl">2940</span>, chromDictObj<span class="op">=</span><span class="va">chromDictObj</span>,<span class="fl">2940</span>, regions<span class="op">=</span><span class="va">regions</span>)</span></span>
 <span><span class="co">##             feature       meanPC nCpG          Z            p</span></span>
-<span><span class="co">## 1          Hypo-DMR -0.020963435   24 -4.6817485 3.366781e-08</span></span>
-<span><span class="co">## 2 partial Hyper-DMR  0.008092709    8  1.7972068 2.372780e-05</span></span>
-<span><span class="co">## 3            random -0.003612135    8 -0.8127458 1.900023e-03</span></span></code></pre></div>
+<span><span class="co">## 1          Hypo-DMR -0.020963435   24 -5.2595086 9.074176e-08</span></span>
+<span><span class="co">## 2 partial Hyper-DMR  0.008092709    8  2.1387060 2.550247e-06</span></span>
+<span><span class="co">## 3            random -0.001061349    4 -0.3405263 3.103850e-01</span></span></code></pre></div>
 <p>getRegionScores returns the mean eigenvector scores for each input
 region, as well as Z-score against the background, and a p-value. As you
 can see in our test set, true DMRs and regions partially overlapping
