@@ -11,7 +11,7 @@ score_metagene <- function(ranks, regions, bin=100, title="", xaxis="Relative Po
     s <- as.numeric(x[[2]])
     e <- as.numeric(x[[3]])
     tmp <- chromDictObj[[unlist(x[[1]])]]
-    tmp <- tmp[tmp$pos >= s & tmp$pos <= e,]
+    tmp <- na.omit(tmp[ .( c(s:e) ) ])
     if(nrow(tmp) > 2){
       tmp$relpos <- ceiling((tmp$pos-s)*(bin/(e-s)))
       tmp <- tmp[tmp$relpos > 0 & tmp$relpos <= bin,]
