@@ -2,7 +2,7 @@
 \alias{methylDiff_metagene}
 \title{Make a metagene from mean percent methylation differences.}
 \usage{
-methylDiff_metagene(chromDictMethObj, regions, bin, title, xaxis, yaxis, return.data, linecol)
+methylDiff_metagene(chromDictMethObj, regions, bin, title, xaxis, yaxis, return.data, linecol, value)
 }
 \description{Uses mean binned percent methylation differences across a set of regions to draw a metagene.}
 \arguments{
@@ -14,6 +14,7 @@ methylDiff_metagene(chromDictMethObj, regions, bin, title, xaxis, yaxis, return.
 \item{yaxis}{Output plot y-axis title}
 \item{return.data}{T/F, whether to return a plot, or data that can be run with plot_metagene() or multiple_metagenes().}
 \item{linecol}{Colour for line, auto="red"}
+\item{value}{Name of the plotted metric in chromDictMethObj. Only needs to be set explicity for abnormal use cases where chromDictMethObj contains a non-rank value output by chromDict().}
 }
 \value{If \code{return.data=F}, returns a \code{grob} containing a metagene plot. Otherwise, returns a \code{list} of two \code{data.frames} containing metagene and metagene standard error plotting information.}
 \examples{
