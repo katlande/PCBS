@@ -41,7 +41,7 @@ getRegionScores <- function(ranks=NULL, regions, chromDictObj=NULL){
       } else{
         pv <- c(pv, NA)
       }
-      }
+    }
      if(ncol(regions) > 3){
       return(data.frame(chrom=regions[[1]], start=regions[[2]], end=regions[[3]], 
                         feature=regions[[4]], meanPC=means, nCpG=nCpGs, Z=zv, p=pv))
