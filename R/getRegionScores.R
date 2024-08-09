@@ -42,7 +42,12 @@ getRegionScores <- function(ranks=NULL, regions, chromDictObj=NULL){
         pv <- c(pv, NA)
       }
       }
-    return(data.frame(chrom=regions[[1]], start=regions[[2]], end=regions[[3]], 
-                      feature=regions[[4]], meanPC=means, nCpG=nCpGs, Z=zv, p=pv))
+     if(ncol(regions) > 3){
+      return(data.frame(chrom=regions[[1]], start=regions[[2]], end=regions[[3]], 
+                        feature=regions[[4]], meanPC=means, nCpG=nCpGs, Z=zv, p=pv))
+    } else {
+      return(data.frame(chrom=regions[[1]], start=regions[[2]], end=regions[[3]], 
+                        meanPC=means, nCpG=nCpGs, Z=zv, p=pv))
+    }
   }
 }
