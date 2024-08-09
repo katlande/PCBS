@@ -1,5 +1,5 @@
 methylDiff_metagene <- function(chromDictMethObj=NULL, regions, bin=100, title="", xaxis="Relative Position",
-                           yaxis="Methylation Difference", return.data=F, linecol="red"){
+                           yaxis="Methylation Difference", return.data=F, linecol="red", value="MethylDiff"){
   
   apply(regions, 1, function(x){
     s <- as.numeric(x[[2]])
@@ -9,7 +9,7 @@ methylDiff_metagene <- function(chromDictMethObj=NULL, regions, bin=100, title="
     if(nrow(tmp) > 2){
       tmp$relpos <- ceiling((tmp$pos-s)*(bin/(e-s)))
       tmp <- tmp[tmp$relpos > 0 & tmp$relpos <= bin,]
-      out <- aggregate(tmp$MethylDiff, by = list(tmp$relpos), FUN="median")
+      out <- aggregate(tmp[[value]], by = list(tmp$relpos), FUN="median")
     }
   }) -> all_score_file
   
