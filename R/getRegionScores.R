@@ -11,6 +11,9 @@ getRegionScores <- function(ranks=NULL, regions, chromDictObj=NULL){
     
     # background distribution for each chromosome:
     message("Getting Background Sites...")
+    if(any(lapply(chromDictObj, nrow) < 100)){
+      warning(paste0("Some chromDict entries contain too few sites: ", toString(names(which(lapply(chromDictObj, nrow) < 100))), ". Remove these entries before re-running."))
+    }
     local_list <- list()
     for(i in names(chromDictObj)){
       d <- chromDictObj[[i]]
