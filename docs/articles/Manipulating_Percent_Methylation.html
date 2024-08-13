@@ -100,9 +100,8 @@ wish to speed up iterative function calls. In order to easily manipulate
 our percent methylation values genome-wide, we can make a percent
 methylation chromDict object that holds the average percent methylation
 difference between two treatments for all filtered loci.</p>
-<pre><code><span><span class="co">## Removing low depth sites...</span></span>
-<span><span class="co">## Calculating mean methylation differences...</span></span>
-<span><span class="co">## Splitting by chromosome...</span></span></code></pre>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">chromDictMethylDiff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/PCBS/man/chromDictMeth.html" class="external-link">chromDictMeth</a></span><span class="op">(</span><span class="va">eigen</span>, IDs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"trt"</span>, <span class="st">"ctl"</span><span class="op">)</span>, filter_thresh <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="mean-methylation-over-regions">Mean methylation over regions<a class="anchor" aria-label="anchor" href="#mean-methylation-over-regions"></a>
