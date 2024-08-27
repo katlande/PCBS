@@ -2,7 +2,8 @@
 \alias{methylDiff_metagene}
 \title{Make a metagene from mean percent methylation differences.}
 \usage{
-methylDiff_metagene(chromDictMethObj, regions, bin, title, xaxis, yaxis, return.data, linecol, value)
+methylDiff_metagene(chromDictMethObj, regions, bin, title,
+xaxis, yaxis, return.data, linecol, value)
 }
 \description{Uses mean binned percent methylation differences across a set of regions to draw a metagene.}
 \arguments{
