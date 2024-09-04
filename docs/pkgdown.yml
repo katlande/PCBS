@@ -3,5 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Differential_Methylation: Differential_Methylation.html
-last_built: 2024-03-28T22:57Z
+  Manipulating_Percent_Methylation: Manipulating_Percent_Methylation.html
+  Optimizing_DMR_Calling: Optimizing_DMR_Calling.html
+last_built: 2024-09-04T19:28Z
 

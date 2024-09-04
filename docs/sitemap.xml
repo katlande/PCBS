@@ -7,6 +7,12 @@
     <loc>/articles/Differential_Methylation.html</loc>
   </url>
   <url>
+    <loc>/articles/Manipulating_Percent_Methylation.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Optimizing_DMR_Calling.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
@@ -16,10 +22,22 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/CheckOvercompression.html</loc>
+  </url>
+  <url>
     <loc>/reference/DefineBestPC.html</loc>
   </url>
   <url>
     <loc>/reference/Get_Novel_DMRs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MethyDiff_Set.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MethylDiff.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Ol_Reliable.html</loc>
   </url>
   <url>
     <loc>/reference/addRanks.html</loc>
@@ -31,16 +49,37 @@
     <loc>/reference/chromDict.html</loc>
   </url>
   <url>
-    <loc>/reference/find_best_nSeed.html</loc>
+    <loc>/reference/chromDictMeth.html</loc>
+  </url>
+  <url>
+    <loc>/reference/eigen.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getPCRanks.html</loc>
   </url>
   <url>
     <loc>/reference/getRegionScores.html</loc>
   </url>
   <url>
+    <loc>/reference/get_all_DMRs.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/lin.html</loc>
+  </url>
+  <url>
+    <loc>/reference/lmIntx.html</loc>
+  </url>
+  <url>
+    <loc>/reference/methylDiff_metagene.html</loc>
+  </url>
+  <url>
     <loc>/reference/multiple_metagenes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/oneSeed.html</loc>
   </url>
   <url>
     <loc>/reference/plot_metagene.html</loc>
@@ -53,5 +92,11 @@
   </url>
   <url>
     <loc>/reference/se.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tilt.html</loc>
+  </url>
+  <url>
+    <loc>/reference/trimDMR.html</loc>
   </url>
 </urlset>
